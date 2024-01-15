@@ -1,0 +1,215 @@
+/* Show it's not fixed to the top */
+.body {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+ /* background: url(images/fond_tra.JPG) no-repeat;
+  background-size: cover;*/
+}
+.container-fluid a:hover{
+  color: red;
+}
+
+.container a:hover{
+  color: #ffde06;
+}
+
+
+footer a{
+  text-decoration: none;
+}
+
+footer a:hover{
+  color: red;
+}
+
+.services{
+  margin-top: 2rem;
+}
+
+h4 a{
+  text-decoration: None;
+  color: black;
+}
+
+.resume .resume-title {
+  font-size: 26px;
+  font-weight: 400;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  color: #222222;
+}
+
+.resume .resume-item {
+  padding: 0 0 20px 20px;
+  margin-top: -2px;
+  border-left: 2px solid #ffde06;
+  position: relative;
+}
+
+.resume .resume-item h5 {
+  font-size: 16px;
+  background: black;
+  padding: 5px 15px;
+  display: inline-block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+
+
+.resume .resume-item:last-child {
+  padding-bottom: 0;
+}
+
+.resume .resume-item::before {
+  content: "";
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50px;
+  left: -9px;
+  top: 0;
+  background: black;
+  border: 2px solid #ffde06;
+}
+
+.resume-item p{
+  text-align: justify;
+}
+
+
+/*------------------------------------------------------------------
+Le design Intérêts
+------------------------------------------------------------------*/
+
+.service{
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 1rem 1rem 1rem 1rem; 
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}   
+.service-center{
+  display: grid;
+ grid-template-columns: repeat(auto-fit,minmax(15rem, 1fr));
+ gap: 5rem;
+} 
+.service .icon{
+  background-color: rgb(237, 185, 0);
+  height: 80px;
+  width: 80px;
+  position: relative;
+  border-radius: 50%;
+} 
+.service .icon i{
+  position: absolute;
+  font-size: 5rem;
+  top: 50%;
+  left: 50%;
+  color: black;
+  transform: translate(-50%,-50%);
+}
+.service .icon img{
+  position: absolute;
+  font-size: 5rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width:65px; 
+  height:65px;
+}
+.service h4{
+  margin-top: 0.3rem;
+}
+
+/*--------------------------------------------------------------
+# Boutton back-to-up revenir en haut
+--------------------------------------------------------------*/
+.back-to-top {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  z-index: 996;
+  background: #007BFF;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  transition: all 0.4s;
+}
+
+.back-to-top i {
+  font-size: 2rem;
+  color: black;
+  line-height: 0;
+}
+
+.back-to-top:hover {
+  background: rgb(237, 185, 0);
+  color: black;
+}
+
+.back-to-top.active {
+  visibility: visible;
+  opacity: 3;
+}
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+.contact .info {
+  width: 100%;
+  background: transparent;
+}
+
+.contact .info i {
+  font-size: 20px;
+  color: rgb(237, 185, 0);
+  float: left;
+  width: 44px;
+  height: 44px;
+  background: #effbf9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact .info h4 {
+  padding: 0 0 0 60px;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #222222;
+}
+
+.contact .info .email:hover i,
+.contact .info .address:hover i,
+.contact .info .phone:hover i,
+.contact .info .insta:hover i,
+.contact .info .snap:hover i {
+  background:rgb(237, 185, 0);
+  color: #fff;
+}
+.wrapper{
+  position: relative;
+  width: 380px;
+  height: 300px;
+  background: transparent;
+  border: 2px solid rgb(237, 185, 0);
+  border-radius: 30px;
+  box-shadow: 0 0 30px black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /*transform: scale(0);*/
+  transition: height .2s  ease;
+} 
+
+.wrapper.active-popup{
+  transform: scale(1);
+} 
+
+.wrapper.active{
+  height: 520px;
+} 
