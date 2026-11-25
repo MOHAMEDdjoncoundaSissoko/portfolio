@@ -1,445 +1,864 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mohamed Djoncounda SISSOKO</title>
+<meta name="description" content="Portfolio de Mohamed Djoncounda SISSOKO, élève ingénieur réseaux et télécommunications à IMT Atlantique, apprenti ingénieur avant-vente WAN chez Orange Business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Mise en page : un « rapport annuel » sobre, en onglets. Accueil avec chiffres clés, registre des réalisations du plus récent au plus ancien, fiche détaillée par réalisation. */
+:root{
+  --bg:#f1f2f0;
+  --surface:#ffffff;
+  --ink:#0e1a2b;
+  --muted:#5b6676;
+  --rule:#d4d8dc;
+  --accent:#8a6a1f;
+  --accent-soft:#f3ecdc;
+  --display:"Newsreader", "Iowan Old Style", Georgia, serif;
+  --body:"IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --wrap:1120px;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1320; --surface:#111c2c; --ink:#e6e9ee; --muted:#95a2b4; --rule:#24324a; --accent:#cfa951; --accent-soft:#2a2516;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1320; --surface:#111c2c; --ink:#e6e9ee; --muted:#95a2b4; --rule:#24324a; --accent:#cfa951; --accent-soft:#2a2516;
+  color-scheme:dark;
+}
 
-  <link rel="icon" href="images/logo_iut.png" type="image/x-icon">
-  <title>Portofolio</title>
+*,*::before,*::after{box-sizing:border-box}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--display);font-weight:500;text-wrap:balance;margin:0;letter-spacing:-0.01em}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+body.locked{overflow:hidden}
 
-  <!--Lien vers mon CSS-->
-  <link rel="stylesheet" href="style1.css">
-  <!--Lien vers les icons Bootstrap-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
-  <!--Lien Bootstrap-->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-  
+/* Barre et onglets */
+.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:stretch;justify-content:space-between;gap:16px;height:58px}
+.brand{font-family:var(--display);font-size:19px;text-decoration:none;white-space:nowrap;display:flex;align-items:center}
+.brand span{color:var(--accent)}
+.tabs{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tabs a{display:flex;align-items:center;padding:0 14px;font-size:14px;text-decoration:none;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
+.tabs a:hover{color:var(--ink)}
+.tabs a[aria-current="page"]{color:var(--ink);border-bottom-color:var(--accent);font-weight:500}
+@media (max-width:640px){.brand{display:none}.top .wrap{padding:0 8px}.tabs{width:100%;justify-content:space-between}.tabs a{padding:0 8px}}
+
+.view[hidden]{display:none}
+.view{padding-bottom:72px}
+
+/* Accueil */
+.hero{padding:60px 0 40px;border-bottom:1px solid var(--rule)}
+.hero-grid{display:grid;grid-template-columns:1fr 240px;gap:48px;align-items:end}
+.hero h1{font-size:clamp(40px,6.2vw,76px);line-height:1.02;font-weight:400;margin-top:10px}
+.hero h1 em{color:var(--accent)}
+.lede{max-width:60ch;font-size:18px;color:var(--muted);margin:22px 0 0}
+.lede strong{color:var(--ink);font-weight:500}
+.portrait{aspect-ratio:4/5;background:var(--ink);position:relative;overflow:hidden}
+.portrait img{width:100%;height:100%;object-fit:cover}
+.portrait::after{content:"";position:absolute;inset:10px;border:1px solid rgba(255,255,255,.35);pointer-events:none}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border:1px solid var(--ink);text-decoration:none;font-size:14px;font-weight:500;background:transparent;color:var(--ink);cursor:pointer;font-family:var(--body)}
+.btn.primary{background:var(--ink);color:var(--bg)}
+.btn:hover{border-color:var(--accent)}
+@media (max-width:760px){.hero-grid{grid-template-columns:1fr}.portrait{max-width:220px;grid-row:1}}
+
+.facts{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--rule)}
+.fact{padding:22px 20px 22px 0;border-right:1px solid var(--rule)}
+.fact+.fact{padding-left:20px}
+.fact:last-child{border-right:0}
+.fact b{display:block;font-family:var(--display);font-weight:400;font-size:34px;line-height:1.1;font-variant-numeric:tabular-nums}
+.fact span{font-size:13px;color:var(--muted)}
+@media (max-width:760px){.facts{grid-template-columns:1fr 1fr}.fact:nth-child(2){border-right:0}.fact:nth-child(3){padding-left:0}.fact:nth-child(-n+2){border-bottom:1px solid var(--rule)}}
+
+.sec-head{display:flex;justify-content:space-between;align-items:baseline;gap:24px;flex-wrap:wrap;margin:56px 0 22px}
+.sec-head h2{font-size:clamp(28px,3.4vw,40px);margin-top:6px}
+.link{font-size:14px;color:var(--ink);text-underline-offset:3px}
+
+/* Cartes de réalisations */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.cards.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){.cards.three{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.cards,.cards.three{grid-template-columns:1fr}}
+.card{display:grid;grid-template-rows:auto 1fr;background:var(--surface);border:1px solid var(--rule);text-decoration:none;color:var(--ink);transition:border-color .15s, transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card[hidden]{display:none}
+.card .thumb{aspect-ratio:16/9;background:#fff;border-bottom:1px solid var(--rule);overflow:hidden}
+.card .thumb img{width:100%;height:100%;object-fit:cover;object-position:center}
+.card .thumb.text{background:var(--ink);color:var(--bg);display:grid;place-items:center;font-family:var(--display);font-size:28px;padding:20px;text-align:center}
+.card .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px}
+.meta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-family:var(--mono);font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+.kind{font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:1px 7px;border:1px solid var(--rule)}
+.kind.exp{border-color:var(--accent);color:var(--accent)}
+.card h3{font-size:22px;line-height:1.22}
+.card .org{font-size:14px;color:var(--muted);margin:0}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 0;padding:0;list-style:none}
+.tags li{font-family:var(--mono);font-size:12px;padding:2px 8px;background:var(--accent-soft);color:var(--ink)}
+
+/* Frise et filtres */
+.axis-box{background:var(--surface);border:1px solid var(--rule);padding:18px 20px 12px;margin-bottom:18px}
+.axis{height:86px}
+.axis svg{width:100%;height:100%;overflow:visible}
+.axis .yr{font-family:var(--mono);font-size:11px;fill:var(--muted)}
+.axis .tick{stroke:var(--rule)}
+.axis .base{stroke:var(--ink);stroke-width:1}
+.axis .bar{cursor:pointer}
+.axis .bar rect{fill:var(--ink);opacity:.85;transition:opacity .15s}
+.axis .bar.exp rect{fill:var(--accent)}
+.axis .bar.ent rect{fill:var(--muted)}
+.axis .bar.dim rect{opacity:.15}
+.axis .bar:hover rect,.axis .bar:focus rect{opacity:1}
+.legend{display:flex;flex-wrap:wrap;gap:18px;font-size:12px;color:var(--muted);margin-top:6px}
+.legend i{display:inline-block;width:14px;height:6px;margin-right:6px;vertical-align:middle;background:var(--ink)}
+.legend i.exp{background:var(--accent)}
+.legend i.ent{background:var(--muted)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
+.chip{font-family:var(--body);font-size:13px;padding:6px 12px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);cursor:pointer;border-radius:999px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip .n{font-family:var(--mono);font-size:11px;opacity:.7;margin-left:4px}
+.sort{margin-left:auto;font-size:13px;color:var(--muted);background:none;border:0;cursor:pointer;font-family:var(--body);text-decoration:underline;text-underline-offset:3px}
+
+/* Parcours */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:48px}
+@media (max-width:760px){.two{grid-template-columns:1fr}}
+.table{width:100%;border-collapse:collapse;font-size:15px}
+.table th{font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 0 8px;border-bottom:1px solid var(--ink)}
+.table td{padding:14px 12px 14px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.table td.y{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums;width:1%;padding-right:20px}
+.table td b{font-weight:500}
+.table td small{display:block;color:var(--muted);font-size:13.5px}
+.skill{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule);font-size:15px}
+.skills{margin:0;border-top:1px solid var(--ink)}
+.skill dt{font-weight:500}
+.skill dd{margin:0;color:var(--muted)}
+@media (max-width:480px){.skill{grid-template-columns:1fr;gap:2px}}
+
+/* Contact */
+.contact{background:var(--ink);color:var(--bg);padding:56px 40px;margin-top:56px}
+.contact h2{font-size:clamp(30px,4vw,48px);font-weight:400;margin-top:8px}
+.contact p{color:color-mix(in srgb,var(--bg) 72%,transparent);max-width:56ch}
+.contact .btn{border-color:var(--bg);color:var(--bg)}
+.contact .btn.primary{background:var(--bg);color:var(--ink)}
+.contact .addr{font-family:var(--mono);font-size:14px;margin-top:14px}
+@media (max-width:640px){.contact{padding:40px 22px}}
+
+/* Fiche d'une réalisation */
+.sheet{position:fixed;inset:0;z-index:40;display:none;background:rgba(6,10,18,.55)}
+.sheet.open{display:block}
+.sheet-panel{position:absolute;top:0;right:0;bottom:0;width:min(920px,100%);background:var(--bg);overflow-y:auto;border-left:1px solid var(--rule);box-shadow:-20px 0 60px rgba(0,0,0,.18)}
+.sheet-head{position:sticky;top:0;background:var(--bg);border-bottom:1px solid var(--rule);display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 28px;z-index:2}
+.sheet-head .nav{display:flex;gap:8px}
+.icon{background:none;border:1px solid var(--rule);color:var(--ink);height:36px;min-width:36px;padding:0 10px;cursor:pointer;font-family:var(--mono);font-size:13px}
+.icon:hover{border-color:var(--accent)}
+.sheet-body{padding:30px 28px 60px}
+.sheet-body h2{font-size:clamp(28px,3.6vw,40px);line-height:1.15;margin:10px 0 4px}
+.sheet-body .org{color:var(--muted);margin:0 0 22px}
+.block{display:grid;grid-template-columns:150px 1fr;gap:24px;padding:20px 0;border-top:1px solid var(--rule)}
+.block h4{margin:0;font-family:var(--mono);font-weight:400;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:4px}
+.block p{margin:0;max-width:66ch}
+.block ul{margin:0;padding-left:18px;max-width:66ch}
+.block li{margin:0 0 8px}
+.block li::marker{color:var(--accent)}
+@media (max-width:640px){.block{grid-template-columns:1fr;gap:8px}.sheet-body,.sheet-head{padding-left:18px;padding-right:18px}}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
+.gallery button{padding:0;border:1px solid var(--rule);background:var(--surface);cursor:zoom-in;display:flex;flex-direction:column;text-align:left;color:var(--ink);font-family:var(--body)}
+.gallery button:hover{border-color:var(--accent)}
+.gallery .g-img{aspect-ratio:4/3;width:100%;overflow:hidden;background:#fff}
+.gallery .g-img img{width:100%;height:100%;object-fit:contain;padding:6px}
+.gallery .g-img img.photo{object-fit:cover;padding:0}
+.gallery figcaption{font-size:12.5px;line-height:1.4;color:var(--muted);padding:8px 10px 10px}
+.gallery figcaption b{display:block;color:var(--ink);font-weight:500}
+@media (max-width:640px){.gallery{grid-template-columns:1fr 1fr}}
+
+/* Visionneuse */
+.lb{position:fixed;inset:0;z-index:60;background:rgba(6,10,18,.94);display:none;grid-template-rows:1fr auto;padding:24px}
+.lb.open{display:grid}
+.lb-stage{display:grid;place-items:center;min-height:0}
+.lb-stage img{max-height:calc(100vh - 150px);max-width:100%;object-fit:contain;background:#fff}
+.lb-bar{display:flex;align-items:center;gap:16px;color:#e6e9ee;max-width:var(--wrap);width:100%;margin:14px auto 0}
+.lb-cap{flex:1;font-size:14px}
+.lb-cap b{font-weight:500;display:block}
+.lb-cap span{color:#95a2b4}
+.lb button{background:none;border:1px solid #4a5870;color:#e6e9ee;width:40px;height:40px;cursor:pointer;font-size:18px;font-family:var(--mono)}
+.lb button:hover{border-color:#cfa951}
+.lb .count{font-family:var(--mono);font-size:12px;color:#95a2b4}
+footer{padding:22px 0 30px;font-size:13px;color:var(--muted);border-top:1px solid var(--rule)}
+/* Langue, CV et centres d'intérêt */
+.right{display:flex;align-items:stretch;gap:14px}
+.lang{display:flex;align-items:center;gap:2px;font-family:var(--mono);font-size:12px}
+.lang button{background:none;border:1px solid transparent;color:var(--muted);padding:4px 7px;cursor:pointer;font-family:var(--mono);font-size:12px}
+.lang button[aria-pressed="true"]{color:var(--ink);border-color:var(--rule);background:var(--surface)}
+@media (max-width:640px){.right{width:100%;gap:6px}.lang{padding-right:4px}}
+.cv-alt{font-size:13px;color:var(--muted);margin:10px 0 0}
+.cv-alt a{color:var(--muted);text-underline-offset:3px}
+.contact .cv-alt,.contact .cv-alt a{color:color-mix(in srgb,var(--bg) 72%,transparent)}
+.hobbies{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:8px}
+.hobby{background:var(--surface);border:1px solid var(--rule);padding:20px 20px 22px;border-top:3px solid var(--accent)}
+.hobby h3{font-size:21px;margin:0 0 6px}
+.hobby p{margin:0;font-size:14.5px;color:var(--muted)}
+@media (max-width:900px){.hobbies{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.hobbies{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="body" style="background: url(images/fond_blanc.avif)">
-  <nav id="nav" class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-    <header class="container-fluid">
+<body>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <article class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-           <a class="nav-link active js-scroll" aria-current="page" href="index.html">Acceuil</a>
-          </li>
-          <li class="nav-item">
-           <a class="nav-link js-scroll" href="competences.html">Projets</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="projetprofessionnel.html">Projet professionnel</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link " href="interets.html">Intérêts</a>
-          </li>
-          <li class="nav-item"> 
-            <a href="liensutiles.html" class="nav-link"> Liens utiles</a>
-          </li>
-        </ul>
-      </article>
-      <a class="navbar-brand" href="#">Mohamed SISSOKO</a>
-    </header>
-  </nav>
-
-  <div class="container-fluid">
-    <div class="row">
-      <!--
-       sticky-lg-top: permet que information personnel du style adresse, num tel soit fixe
-      -->
-      <div class="text-bg-light col-lg-4 col-md-4 sticky-lg-top sticky-md-top vh-100">
-        <section class="d-flex flex-column h-100 text-center overflow-auto shadow">
-          <article id="img">
-            <img class="w-100 img-fluid mb-1 " src="images/IMG_1763.jpg" alt="Image">
-            <h4 class="text-secondary mt-2">Mohamed Djoncounda <br> SISSOKO</h4>
-                    
-            <aside class="mt-3">
-              <em>Etudiant en cycle d'ingénieur à l'IMT Atlantique</em>
-            </aside>
-
-            <aside class="my-3" style="height: 22px;">
-              <h5 class="typed-text-output d-inline-block">Apprenti Ingénieur Avant-Vente chez Orange</h5>
-             <div class="text-white"></div>
-            </aside>
-            
-          </article>
-          <!--
-          Cette partie article concerne le renseignement "adresse, numero... en plus de l'insertion de quelques icônes"
-          -->
-                      
-          <article id="table" class="d-flex justify-content-center my-5 mb-1">
-            <table>
-              <tr>
-                <td><i class="bi bi-geo-alt"></i></td>
-                <td>43 Chemin Michoun C24</td>
-              </tr>
-              <tr>
-               <td><i class="bi bi-houses"></i></td>
-                <td>Toulouse (31500)</td>
-              </tr>
-              <tr>
-                <td><i class="bi bi-telephone"></i></td>
-                <td>0780340959</td>
-              </tr>
-             <tr>
-               <td><i class="bi bi-envelope"></i></td>
-               <td>mohameddsissoko@outlook.fr</td>
-             </tr>                   
-             <tr>
-               <td><i class="bi bi-calendar"></i></td>
-               <td>21 ans</td>
-             </tr>
-            
-             <tr>
-              <td><i class="bi bi-flag"></i></td>
-              <td>Malien 🇲🇱</td>
-              </tr>
-           </table>                  
-
-          </article>
-
-          <aside id="i" class="d-flex justify-content-center mt-auto mb-4">
-           <a class="btn btn-warning text-bg-dark btn-square mx-1" href="#"><i class="bi bi-twitter-x"></i></a>
-           <a class="btn btn-warning  text-bg-dark btn-square mx-1" href="#"><i class="bi bi-facebook"></i></a>
-           <a class="btn btn-warning  text-bg-dark btn-square mx-1" href="https://www.linkedin.com/in/mohamed-djoncounda-sissoko-3736522a0"><i class="bi bi-linkedin"></i></a>
-           <a class="btn btn-warning  text-bg-dark btn-square mx-1" href="#"><i class="bi bi-instagram"></i></a>
-          </aside>
-          <aside id="o" class="d-flex align-items-end justify-content-between border-top">
-            <a href="./CV_IMT_Mohamed-SISSOKO.pdf" class="btn w-50 border-end">Téléchargez le CV</a>
-            <a href="./liensutiles.html" class="btn w-50 btn-scroll">Contactez moi</a>
-          </aside>
-        </section>
-      </div>
-
-      <div class="col-lg-8 col-md-8">
-
-       <section class="py-5 border-bottom border-warning  border-2   text-bg-dark p-3   wow fadeInUp" data-wow-delay="0.1s">
-          <h2 id="for" class="title pb-2 mb-3">Diplômes et Formations</h2>  
-          <article class="border-start border-2 border-warning pt-2 ps-5">
-
-            <aside class="position-relative  mb-1">
-             <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-             <h5> Diplôme d'ingénieur </h5>
-             <small>2025 - Présent</small>
-             <br><em>IMT Atlantique (Campus de Brest) </em>
-             <p>Première année en cycle d’ingénieure Informatique, Réseau et Télécommunications</p>
-            </aside>
-
-            <aside class="position-relative  mb-1">
-             <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-             <h5>Bachelor Universitaire de Technologie (BUT) </h5>
-             <small>2023 - 2025</small>
-             <br><em>IUT de Lannion</em>
-             <p>Obtention d'un DUT (ex BUT) en Reseaux et Télécommunications, parcours Cybersécurité</p>
-            </aside>
-
-            <aside class="position-relative mb-4">
-             <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-             <h5>Diplôme Universitaire de Technologie (DUT) </h5>
-              <small>2022 - 2023</small>
-              <br><em>Technolab-ISTA | Bamako, BA, Mali</em>
-              <p>Obtention d'un DUT avec mention assez-bien en Électronique Maintenance Informatique à Technolab-ISTA</p>
-            </aside>
-
-            <aside class="position-relative mb-4">
-              <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-              <h5>Baccaleauréat Technique et Général</h5>
-              <small>2020 -2021</small>
-              <br><em>Lycée Technique de Bamako | Bamako, BA, Mali</em>
-              <p>Obtention du baccaleauréat technique et général malien avec mention assez-bien en Génie Electronique (GELN) </p>
-            </aside>
-          </article>
-       </section>
-
-        <section class="py-5 border-bottom border-warning  border-2 text-bg-dark p-3 wow fadeInUp" data-wow-delay="0.1s" >
-
-          <h2 id="comp" class="title pb-2 mb-3">Compétences</h2> 
-          <article class="border-start border-2 border-warning pt-2 ps-5">
-                                  
-            <aside class="position-relative mb-4">
-                        <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                        <h5 class="mb-1">Réseaux</h5>
-                        <ul >
-                          <li>Configurer des services (Apache, DNS, FTP, DHCP, SSH, FTP, AD et Radius) </li>
-                          <li>Connaissance des modèles TCP/IP et OSI</li>
-                          <li>Sécuriser des services et des réseaux</li>
-                          <li>Connaissance de protocole de routage OSPF, RIP et BGP</li>
-                          <li>Configurer des équipements actifs (routeurs, switch, Stormshield)</li>
-                          <li>Configurer des politiques de sécurité QoS et sécuriser des flux IPsec</li>
-                          <li>Connaissance des règles de filtrage</li>
-                        </ul> 
-            </aside>
-                  
-            <aside class="position-relative mb-4">
-                      <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                      <h5 class="mb-1">Cybersécurité</h5>
-                      <ul>
-                        <li>Attestation de suivi du Mooc de l'ANSSI (Autorité Nationnale française en matière de Sécurité et de défense des Systèmes d'Information)</li>
-                        <li>Connaissance des différentes types d'attaque</li>
-                        <li>Pentest - Approche blackbox</li>
-                        <li>Identification et exploitation de vulnérabilités dans un serveur</li>
-                        <li>Simulation de scénarios d’attaque comme Usurpation d’identité de l’administrateur et Défacement du site web</li>
-                        <li>Audit de sécurité</li>
-                        <li>Connaissance de John the ripper, hydra et nmap</li>
-                      </ul>
-            </aside>
-
-           <aside class="position-relative mb-4">
-                      <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                      <h5 class="mb-1">Automatisation de tâches</h5>
-                      <ul>
-                        <li>Bash (Linux)</li>
-                        <li>Powershell (Windows)</li>
-                      </ul>
-           </aside>
-
-           <aside class="position-relative mb-4">
-                      <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                      <h5 class="mb-1">Système</h5>
-                      <ul>
-                        <li>Connaissances des commandes Linux et Windows</li>
-                        <li>Installation des sytèmes Linux et Windows</li>
-                        <li>Configuaration des droits Windows et Linux</li>
-                        <li>Créer et gérer des hôtes depuis l'ESXII</li>
-                        <li>Conception et déploiement d’architectures microservices avec conteneurisation (Docker) et développement d’API REST sécurisées.</li>
-                      </ul>
-           </aside>
-
-           <aside class="position-relative mb-4">
-                      <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                      <h5 class="mb-1">Programmation</h5>
-                      <ul>
-                        <li>Web: HTML, CSS, JS et PHP</li>
-                        <li>Langage de programmation: Python, JAVA et C </li>
-                      </ul>
-           </aside>
-
-           <aside class="position-relative mb-4">
-                      <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                      <h5 class="mb-1">Base de données</h5>
-                      <ul>
-                          <li>SQL</li>
-                          <li>ACCESS</li>
-                      </ul>
-           </aside>
-                    
-           <aside class="position-relative mb-4">
-                      <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                      <h5 class="mb-1">Télécoms</h5>
-                      <ul>
-                        <li>Soudure de fibres optiques</li>
-                        <li>Mesure sur un système ADSL</li>
-                        <li>Réfraction au niveau d’un dioptre air/verre et verre/air</li>
-                        <li>Connaissance de la loi de DESCARTES sur la reflexion</li>
-                        <li>Mesure de caractérisation du coupleur 1 vers 4</li>
-                      </ul>
-           </aside>
-
-            <aside class="position-relative mb-4">
-                      <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                      <h5 class="mb-1">Gestion de projet</h5>
-                      <ul>
-                        <li>Planification (Gantt)</li>
-                        <li>Reporting (mail, réunion) </li>
-                        <li>Gestion de risque</li>
-                      </ul>
-            </aside>
-
-          </article>
-        </section>
-
-        <section class="py-5 border-bottom border-warning  border-2  text-bg-dark p-3  wow fadeInUp" data-wow-delay="0.1s">
-          <h2 id="ex" class="title pb-2 mb-3">Expérience</h2> 
-          <article class="border-start border-2 border-warning pt-2 ps-5 ">
-
-            <aside class="position-relative mb-4">
-                        <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                        <h5 class="mb-1">Stagiaire</h5>
-                        <p class="mb-2">Université de Dalhousie | <small>Avril 2025 - Juin 2025</small></p>
-                        <em class="mb-2">Halifax, NS, Canada</em>
-                         <br> <small class="mb-2" >Stagiaire dans le laboratoire de la faculté de sciences</small>
-                          <ul >
-                            <li>Étude sur la technologie de LoraWan</li>
-                            <li>Tester la nouvelle version de LoraWan</li>
-                            <li>Faire des rapports detaillés</li>
-                          </ul>  
-            </aside>
-
-            <aside class="position-relative mb-4">
-                        <span class="bi bi-arrow-right fs-4 text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                        <h5 class="mb-1">Directeur</h5>
-                        <p class="mb-2">SoftGraph & Installation | <small>2021 - 2023</small></p>
-                        <em class="mb-2">Bamako, BA, Mali</em>
-                         <br> <small class="mb-2" >Fondateur de la startup SoftGraph & Installation </small>
-                          <ul >
-                            <li>Installation de systèmes d'exploitaion (Windows, Linux, Ubuntu)</li>
-                            <li>Installation de systèmes d'offices </li>
-                            <li>Activation d'office et Windows</li>
-                            <li>Conception de flyer publicitaire, de logos, cover</li>
-                          </ul>  
-            </aside>
-
-            <aside class="position-relative mb-4">
-                        <span class="bi bi-arrow-right fs-4  text-warning position-absolute" style="top: -5px; left: -50px;"></span>
-                        <h5 class="mb-1">Vendeur</h5>
-                        <p class="mb-2">Chelsea Eléctronique | <small>2015 - 2023</small></p>
-                        <em class="mb-2">Marché de Médine | Bamako, BA, Mali</em>
-                        <br><small class="mb-2">Vente d'appareil et materiel électronique en détail et en gros</small> 
-                          <ul>
-                            <li>Ordinateur (HP, MAC, DELL, SAMSUNG)</li>
-                            <li>Smartphone (SAMSUNG, Techno, Itel, Iphone, Huawei)</li>
-                            <li> Groupe électrogène, panneau solaire et humidificateurs</li>
-                            <li> Ecran de Smartphone</li>
-                            <li>Coque de protection</li>
-                            <li>Ecran de protection</li>
-                            <li>Écouteurs et casque audio ...</li>
-                          
-                          </ul>
-            </aside>      
-
-          </article>
-        </section>
-
-      <section class="py-5 border-bottom border-warning  border-2  text-bg-dark p-3  wow fadeInUp" data-wow-delay="0.1s">   
-        <article class="row">  
-
-        <aside  class="col-lg-6 d-flex align-items-stretch pt-2 ps-5">
-
-          <div class="accordion " >
-            <div class="accordion-item bg-dark border-warning">
-              <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                  <b class="lead">Compétences linguistiques</b>
-                </button>
-              </h2>
-              <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                <div class="accordion-body">
-                  <strong class="text-warning">Bambara (Bamananka)</strong>
-                  <p class="text-white">C2: Langue marternelle</p>
-                  <strong class="text-warning">Français</strong>
-                  <p class="text-white">C1: Vocabulaire du quotidient</p>
-                  <strong  class="text-warning">Anglais</strong>
-                  <p class="text-white">A2 +: Capable de comprendre les grandes lignes d'une conversation et d'écrire un texte</p>
-                </div>
-              </div>
-            </div>
-          </div> 
-        </aside>
-      
-        <aside  class="col-lg-6 d-flex align-items-stretch pt-2 ps-5">
-          <div class="accordion" >
-          <div class="accordion-item bg-dark border-warning">
-            <h2 class="accordion-header" id="headingTwo">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                <b class="lead">Centres d'intérêt</b>
-              </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-              <div class="accordion-body">
-                <ul>
-                  <li><b class="text-warning">Root-me</b>
-                   <ul>
-                      <li class="text-white">Hacking éthique</li>
-                    </ul>
-                  </li>
-                  <li><b class="text-warning">Musique mandingue</b>
-                    <ul>
-                      <li class="text-white">Pour me motiver</li>
-                      <li class="text-white">Pour me détendre</li>
-                    </ul>
-                  </li>
-                  <li><b class="text-warning">Football</b>
-                    <ul>
-                     <li class="text-white">Développer mon sens du travail collectif</li>
-                   </ul>
-                  </li>
-                  <li><b class="text-warning">Veille Technologique</b>
-                   <ul>
-                      <li class="text-white">Approfondir mes connaissances</li>
-                    </ul>
-                  </li>
-              </ul>
-              
-              </div>
-            </div>
-          </div>
-        </div>
-        </aside>
-      </article>
-
-         <!--<aside  class="col-lg-6" class="d-flex align-items-stretch mt-4 ">
-            <h4 id="langue">Compétences linguistiques</h4>
-            <strong class="text-warning">Bambara (Bamananka)</strong>
-            <p>C2: Langue marternelle</p>
-            <strong class="text-warning">Français</strong>
-            <p>C2: Vocabulaire du quotidient</p>
-            <strong  class="text-warning">Anglais</strong>
-            <p>B2: Capable de comprendre les grandes lignes d'une conversation et d'écrire un texte simple</p>
-         </aside>-->
-
-                
-      </section>
-
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#accueil">M. D. Sissoko<span>.</span></a>
+    <div class="right">
+      <nav class="tabs" aria-label="Onglets" data-i-aria="tabs">
+        <a href="#accueil" data-tab="accueil" data-i="tab_home">Accueil</a>
+        <a href="#realisations" data-tab="realisations" data-i="tab_work">Réalisations</a>
+        <a href="#parcours" data-tab="parcours" data-i="tab_path">Parcours</a>
+        <a href="#contact" data-tab="contact" data-i="tab_contact">Contact</a>
+      </nav>
+      <div class="lang" role="group" aria-label="Langue / Language">
+        <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
       </div>
     </div>
   </div>
-    
-  <footer id="footer" class="container-fluid">
-      <section class="text-bg-secondary">
-        <article class="row px-5 pt-5 mt-5">
-         
-          <aside class="col-6 col-md-2 mb-3">
-            <h5>Section</h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#for" class="nav-link p-0 text-body-secondary">Diplôme et Formation</a></li>
-              <li class="nav-item mb-2"><a href="#comp" class="nav-link p-0 text-body-secondary">Compétences</a></li>
-              <li class="nav-item mb-2"><a href="#ex" class="nav-link p-0 text-body-secondary">Expérience</a></li>
-              <li class="nav-item mb-2"><a href="#centre" class="nav-link p-0 text-body-secondary">Centres d'intérêt</a></li>
-              <li class="nav-item mb-2"><a href="#langue" class="nav-link p-0 text-body-secondary">Langue</a></li>
-            </ul>
-          </aside>
+</header>
 
-          <aside class="col-6 col-md-2 mb-3">
-            <h5>Diplômes</h5>
-            <ul class="nav flex-column">
-              <li><a href="pdf/DUT.pdf" class="text-body-secondary" target="_blank">Diplôme Universitaire de Technologie</a></li>
-              <li><a href="pdf/Attestationdubac.pdf" class="text-body-secondary" target="_blank">Baccauléreat Malien</a></li>
-            </ul>
-          </aside>
+<main>
+  <!-- ACCUEIL -->
+  <section class="view" id="v-accueil" data-view="accueil">
+    <div class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow" data-i="hero_eyebrow">Réseaux · Sécurité · Télécommunications</p>
+          <h1>Mohamed Djoncounda <em>Sissoko</em></h1>
+          <p class="lede" data-i="hero_lede">Élève ingénieur à <strong>IMT Atlantique</strong> en informatique, réseaux et télécommunications, en alternance chez <strong>Orange Business</strong> comme ingénieur avant-vente WAN. Je conçois des architectures réseau et je m'oriente vers la <strong>sécurité réseau</strong>.</p>
+          <div class="cta">
+            <a class="btn primary" href="#realisations" data-i="btn_work">Voir les réalisations</a>
+            <a class="btn cv-link" href="cv/CV_Mohamed_Djoncounda_SISSOKO_FR.pdf" download data-i="btn_cv">Télécharger mon CV</a>
+            <a class="btn" href="https://www.linkedin.com/in/mohamed-djoncounda-sissoko-3736522a0/">LinkedIn</a>
+          </div>
+          <p class="cv-alt"><span data-i="cv_other">Aussi disponible</span> : <a class="cv-other" href="cv/CV_Mohamed_Djoncounda_SISSOKO_EN.pdf" download data-i="cv_other_link">CV en anglais</a></p>
+        </div>
+        <div class="portrait"><img src="img/photo.webp" alt="Mohamed Djoncounda Sissoko"></div>
+      </div>
+    </div>
+    <div class="wrap">
+      <div class="facts">
+        <div class="fact"><b>2028</b><span data-i="fact1">Diplôme d'ingénieur, IMT Atlantique</span></div>
+        <div class="fact"><b>2</b><span data-i="fact2">Stages à l'étranger : Canada, Royaume-Uni</span></div>
+        <div class="fact"><b>8</b><span data-i="fact3">Projets techniques et entrepreneuriaux</span></div>
+        <div class="fact"><b>4</b><span data-i="fact4">Pays de formation et de travail : Mali, France, Canada, Royaume-Uni</span></div>
+      </div>
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i="latest_eyebrow">Les plus récentes</p><h2 data-i="latest_title">Dernières réalisations</h2></div>
+        <a class="link" href="#realisations" data-i="latest_all">Toutes les réalisations →</a>
+      </div>
+      <div class="cards three" id="latest"></div>
+    </div>
+  </section>
 
-          <aside class="col-6 col-md-2 mb-3">
-            <h5>Autres</h5>
-            <ul class="nav flex-column">
-              <li class="nav-item mb-2">
-                <a href="#nav" class="text-body-secondary">Revenir en haut</a>
-              </li>
-              <li class="nav-item mb-2">
-                <a href="#table" class="text-body-secondary">Voir informations personnelles</a>
-             </li>
-            </ul>
-          </aside>
-    
-        
-          <aside class="col-md-5 offset-md-1 mb-3">
-            <form>
-              <h5>Subscribe to our newsletter</h5>
-              <p>Monthly digest of what's new and exciting from us.</p>
-              <div class="d-flex flex-column flex-sm-row w-100 gap-2">
-                <label for="newsletter1" class="visually-hidden">Email address</label>
-                <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
-                <button class="btn btn-primary" type="button">Subscribe</button>
-              </div>
-            </form>
-          </aside>
-        </article>
-      </section>
-  </footer>
+  <!-- RÉALISATIONS -->
+  <section class="view" id="v-realisations" data-view="realisations" hidden>
+    <div class="wrap">
+      <div class="sec-head">
+        <div><p class="eyebrow" data-i="work_eyebrow">Registre 2026 → 2021</p><h2 data-i="tab_work">Réalisations</h2></div>
+      </div>
+      <div class="axis-box">
+        <div class="axis" id="axis" role="group"></div>
+        <div class="legend"><span><i></i><span data-i="lg_proj">Projet</span></span><span><i class="exp"></i><span data-i="lg_exp">Expérience professionnelle</span></span><span><i class="ent"></i><span data-i="lg_ent">Entrepreneuriat</span></span></div>
+      </div>
+      <div class="filters" role="group" id="filters"></div>
+      <div class="cards" id="cards"></div>
+    </div>
+  </section>
 
-  <a href="#" class="back-to-top text-right d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- PARCOURS -->
+  <section class="view" id="v-parcours" data-view="parcours" hidden>
+    <div class="wrap">
+      <div class="sec-head"><div><p class="eyebrow" data-i="path_eyebrow">Formation et compétences</p><h2 data-i="tab_path">Parcours</h2></div></div>
+      <div class="two">
+        <div>
+          <table class="table">
+            <thead><tr><th data-i="th_years">Années</th><th data-i="th_degree">Diplôme</th></tr></thead>
+            <tbody>
+              <tr><td class="y">2025 – 2028</td><td><b data-i="ed1">Diplôme d'ingénieur, IMT Atlantique</b><small data-i="ed1s">Informatique, réseaux et télécommunications, en apprentissage · Brest</small></td></tr>
+              <tr><td class="y">2023 – 2025</td><td><b data-i="ed2">BUT Réseaux et Télécommunications</b><small data-i="ed2s">Parcours cybersécurité · IUT de Lannion</small></td></tr>
+              <tr><td class="y">2022 – 2023</td><td><b data-i="ed3">DUT Électronique et maintenance informatique</b><small data-i="ed3s">Mention assez bien · Technolab-ISTA, Bamako</small></td></tr>
+              <tr><td class="y">2020 – 2021</td><td><b data-i="ed4">Baccalauréat technique, génie électronique</b><small data-i="ed4s">Mention assez bien · Lycée technique de Bamako</small></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <dl class="skills">
+          <div class="skill"><dt data-i="sk1">Réseaux</dt><dd data-i="sk1d">WAN, Cisco (routage, commutation, VLAN), OSPF, NAT/PAT, QoS, DNS, DHCP, Active Directory, RADIUS</dd></div>
+          <div class="skill"><dt data-i="sk2">Sécurité</dt><dd data-i="sk2d">VPN IPsec, pare-feux Stormshield, ACL, tests d'intrusion, audit de vulnérabilités, Kali Linux, Metasploit, Wireshark</dd></div>
+          <div class="skill"><dt data-i="sk3">Télécoms</dt><dd data-i="sk3d">Modulation et démodulation, conception RF sous ADS, LoRaWAN et LR-FHSS, radio logicielle (HackRF, SDRangel)</dd></div>
+          <div class="skill"><dt data-i="sk4">Développement</dt><dd>Python, C, Java, JavaScript (Three.js, WebGPU), PHP, SQL, HTML/CSS</dd></div>
+          <div class="skill"><dt data-i="sk5">Certification</dt><dd data-i="sk5d">MOOC SecNumacadémie de l'ANSSI</dd></div>
+          <div class="skill"><dt data-i="sk6">Langues</dt><dd data-i="sk6d">Français, anglais</dd></div>
+        </dl>
+      </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>  
+      <div class="sec-head"><div><p class="eyebrow" data-i="hob_eyebrow">En dehors du travail</p><h2 data-i="hob_title">Centres d'intérêt</h2></div></div>
+      <div class="hobbies">
+        <div class="hobby"><h3 data-i="h1">Hacking éthique</h3><p data-i="h1d">Je résous des challenges sur Root-Me pour pratiquer l'attaque et la défense en dehors des cours.</p></div>
+        <div class="hobby"><h3 data-i="h2">Sport</h3><p data-i="h2d">Running, badminton, tennis et musculation.</p></div>
+        <div class="hobby"><h3 data-i="h3">Cuisine</h3><p data-i="h3d">Cuisiner et partager des repas.</p></div>
+        <div class="hobby"><h3 data-i="h4">Voyages</h3><p data-i="h4d">J'ai vécu et étudié ou travaillé au Mali, en France, au Canada et au Royaume-Uni.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="view" id="v-contact" data-view="contact" hidden>
+    <div class="wrap">
+      <div class="contact">
+        <p class="eyebrow" style="color:inherit;opacity:.7" data-i="tab_contact">Contact</p>
+        <h2 data-i="ct_title">Échangeons sur un stage, une alternance ou un projet réseau.</h2>
+        <p data-i="ct_text">Le plus simple est de m'écrire ou de me contacter sur LinkedIn.</p>
+        <div class="cta">
+          <a class="btn primary" href="mailto:mohameddsissoko@outlook.fr" data-i="ct_mail">Écrire un e-mail</a>
+          <a class="btn cv-link" href="cv/CV_Mohamed_Djoncounda_SISSOKO_FR.pdf" download data-i="btn_cv">Télécharger mon CV</a>
+          <a class="btn" href="https://www.linkedin.com/in/mohamed-djoncounda-sissoko-3736522a0/">LinkedIn</a>
+        </div>
+        <p class="addr">mohameddsissoko@outlook.fr</p>
+        <p class="cv-alt"><span data-i="cv_other">Aussi disponible</span> : <a class="cv-other" href="cv/CV_Mohamed_Djoncounda_SISSOKO_EN.pdf" download data-i="cv_other_link">CV en anglais</a></p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 2026 Mohamed Djoncounda Sissoko</div></footer>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sheet-title">
+  <div class="sheet-panel" id="sheet-panel">
+    <div class="sheet-head">
+      <div class="nav">
+        <button type="button" class="icon" id="sh-newer" data-i="sh_newer">← Plus récent</button>
+        <button type="button" class="icon" id="sh-older" data-i="sh_older">Plus ancien →</button>
+      </div>
+      <button type="button" class="icon" id="sh-close" data-i="sh_close">Fermer ×</button>
+    </div>
+    <div class="sheet-body" id="sheet-body"></div>
+  </div>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true">
+  <div class="lb-stage"><img id="lb-img" alt=""></div>
+  <div class="lb-bar">
+    <button type="button" id="lb-prev" aria-label="←">←</button>
+    <button type="button" id="lb-next" aria-label="→">→</button>
+    <div class="lb-cap"><b id="lb-title"></b><span id="lb-text"></span></div>
+    <span class="count" id="lb-count"></span>
+    <button type="button" id="lb-close" aria-label="×">×</button>
+  </div>
+</div>
+
+<script>
+const ENTRIES = [
+  {
+    id:"dmu", kind:"exp", start:"2026-06", end:"2026-08", when:"Juin – août 2026", place:"Leicester, Royaume-Uni",
+    domains:["Expérience","Développement"],
+    title:"Game Development Engineer, stagiaire",
+    org:"DMU Game Studios, De Montfort University",
+    context:"Le studio de l'université voulait savoir si WebGPU, la nouvelle API graphique des navigateurs, permet de faire tourner un vrai jeu multijoueur sans rien installer. Ma mission : explorer l'API, produire des exemples, puis réunir le tout dans un jeu de type Minecraft.",
+    did:[
+      "Rendu 3D d'un monde en voxels avec WebGPU et Three.js",
+      "Multijoueur temps réel par WebSocket : création de salons isolés, synchronisation des joueurs et du monde, chat intégré",
+      "Serveur Deno qui conserve le monde, même après un redémarrage",
+      "Exemples et outils réutilisables pour le jeu web, démo jouable en ligne et poster de présentation"
+    ],
+    tags:["JavaScript","Three.js","WebGPU","WebSocket","Deno"],
+    link:["Jouer à la démo","https://minecraft-server.mohameddjoncoundasissoko.deno.net/"],
+    imgs:[
+      ["dmu-jeu","Le jeu dans le navigateur","Monde voxel, barre d'objets et chat entre joueurs.","photo"],
+      ["dmu-architecture","Architecture","Le navigateur fait le rendu en WebGPU, le serveur Deno gère l'état partagé par WebSocket."],
+      ["dmu-leicester","Vie en Angleterre","Pratique de l'anglais au quotidien pendant le stage.","photo"]
+    ]
+  },
+  {
+    id:"orange", kind:"exp", start:"2025-09", end:"2026-11", when:"Sept. 2025 – aujourd'hui", place:"Toulouse",
+    domains:["Expérience","Réseau"],
+    title:"Ingénieur avant-vente WAN, en alternance",
+    org:"Orange Business · Compte Airbus",
+    context:"Airbus et ses partenaires ont besoin de relier leurs sites en France et à l'international. En avant-vente, je fais le lien entre leur besoin et la solution réseau qu'Orange Business leur propose.",
+    did:[
+      "Analyse des besoins des clients et de leurs partenaires",
+      "Conception de solutions de connectivité WAN pour des sites en France et à l'international",
+      "Évaluation de la faisabilité technique des solutions proposées",
+      "Réunions clients : recueil des besoins et présentation des architectures réseau"
+    ],
+    tags:["WAN","Avant-vente","Architecture réseau","Relation client"],
+    imgs:[]
+  },
+  {
+    id:"dalhousie", kind:"exp", start:"2025-04", end:"2025-06", when:"Avr. – juin 2025", place:"Halifax, Canada",
+    domains:["Expérience","Sécurité","Télécoms"],
+    title:"Stagiaire de recherche en sécurité des systèmes",
+    org:"NIMS Lab, Faculty of Computer Science, Dalhousie University",
+    context:"LR-FHSS est une modulation récente de LoRaWAN, le réseau des objets connectés longue portée. Elle saute d'une fréquence à l'autre pour résister au brouillage, mais elle avait très peu été testée en conditions réelles. Le laboratoire voulait mesurer ses limites face à un brouilleur. Je me suis chargé de la partie émission, puis j'ai participé aux essais de brouillage.",
+    did:[
+      "Prise en main de LoRaWAN : module LILYGO enregistré sur The Things Network, message envoyé toutes les 60 secondes vers la passerelle du laboratoire, et affichage défilant des messages reçus sur l'écran du module",
+      "Émission LR-FHSS sur un module Semtech LR1110 monté sur une carte STM32 Nucleo : adaptation du code de Semtech, peu documenté, et flash du firmware avec STM32CubeProgrammer, avec un tutoriel écrit pour l'équipe",
+      "Réglage sur la bande nord-américaine (904 MHz) et passage de LoRa à LR-FHSS dans le code, puis envoi d'un message texte découpé en fragments pour donner plus de prise au brouillage",
+      "Essais de brouillage avec un HackRF, et observation du spectre dans SDRangel : depuis l'extérieur du bâtiment, avec l'émetteur à 250 m, puis avec un signal volontairement affaibli (codage moins redondant, message de 50 caractères, puissance de 2 dBm)",
+      "Résultat : aucun paquet perdu, même à −132 dBm de puissance reçue. Le brouilleur n'était pas assez puissant face à LR-FHSS, ce que l'encadrant a confirmé par ses propres tests"
+    ],
+    tags:["LoRaWAN","LR-FHSS","The Things Network","STM32","HackRF","SDRangel"],
+    imgs:[
+      ["dalhousie-emetteur-lrfhss","Émetteur LR-FHSS","Module Semtech LR1110 sur carte STM32 Nucleo, qui envoie les messages vers The Things Network.","photo"],
+      ["dalhousie-emetteur-lora","Émetteur LoRa","Module LILYGO T3 à 915 MHz utilisé pour les premiers essais LoRaWAN.","photo"],
+      ["dalhousie-brouilleur","Brouilleur","HackRF avec PortaPack, application Jammer TX réglée de 904,35 à 905,35 MHz.","photo"],
+      ["lrfhss-fonctionnement","Fonctionnement de LR-FHSS","Le signal est réparti sur plusieurs canaux pour mieux résister aux interférences."],
+      ["lrfhss-limites","Limites de LR-FHSS","Temps d'émission, compatibilité et besoins côté passerelle."],
+      ["lrfhss-comparaison","LoRa et LR-FHSS comparés","Tableau de synthèse présenté à l'équipe de recherche."]
+    ]
+  },
+  {
+    id:"ipsec", kind:"proj", start:"2025-01", end:"2025-04", when:"Janv. – avr. 2025", place:"IUT de Lannion",
+    domains:["Sécurité","Réseau"],
+    title:"Sécurisation des réseaux et des services : VPN IPsec et pare-feux",
+    org:"Suite du réseau multi-sites, avec des pare-feux Stormshield",
+    context:"Le réseau des deux sites montés le semestre précédent fonctionnait, mais ses échanges passaient en clair et ses services étaient exposés. Il fallait le durcir sans casser ce qui marchait.",
+    did:[
+      "Tunnel VPN IPsec entre les deux sites pour chiffrer le trafic qui passe par Internet",
+      "Pare-feux Stormshield : réseau privé, zone démilitarisée pour les serveurs, portail captif et filtrage des flux",
+      "Protection contre l'usurpation ARP et DHCP",
+      "Services sécurisés : DNSSEC, SSH par clé, FTPS et HTTPS",
+      "Cahier de recette et soutenance devant le jury"
+    ],
+    tags:["IPsec","Stormshield","DMZ","ACL","DHCP snooping","DNSSEC","HTTPS"],
+    imgs:[
+      ["ipsec-cablage","Schéma de câblage","Chaque site passe désormais par un pare-feu Stormshield qui sépare le LAN et la DMZ."],
+      ["ipsec-slide","Rôle du VPN IPsec","Extrait de la soutenance : ESP, ISAKMP et intérêt du tunnel."],
+      ["ipsec-acl","Filtrage des flux","Extrait de la soutenance : listes de contrôle d'accès sur les routeurs Cisco."]
+    ]
+  },
+  {
+    id:"ampli", kind:"proj", start:"2024-12", end:"2024-12", when:"Déc. 2024", place:"IUT de Lannion",
+    domains:["Télécoms"],
+    title:"Conception d'un amplificateur RF à 1,7 GHz",
+    org:"Simulation et optimisation sous ADS",
+    context:"Un amplificateur radio n'amplifie bien que si son entrée et sa sortie sont adaptées à la fréquence de travail. Le but était de concevoir un amplificateur à transistor pour 1,7 GHz, puis d'atteindre des critères d'adaptation stricts.",
+    did:[
+      "Polarisation du transistor en continu et simulation des paramètres S",
+      "Remplacement des composants idéaux par des composants réels calculés pour 1,7 GHz (C = 18,72 pF, L = 140,4 nH)",
+      "Mesure avant adaptation : gain de 20,2 dB et isolation de −61,3 dB",
+      "Réseaux d'adaptation tracés sur l'abaque de Smith : inductance série en entrée, condensateur parallèle en sortie",
+      "Optimisation finale des composants pour viser S11 et S22 inférieurs à −20 dB"
+    ],
+    tags:["ADS","Paramètres S","Abaque de Smith","Adaptation d'impédance"],
+    imgs:[
+      ["ads-schema","Schéma de l'amplificateur","Transistor polarisé avec ses composants réels dimensionnés pour 1,7 GHz."],
+      ["ads-smith","Adaptation sur l'abaque de Smith","Construction du réseau d'adaptation avec l'outil Smith Chart d'ADS."],
+      ["ads-s11","Coefficient de réflexion S11","Creux marqué autour de la fréquence de travail après adaptation."]
+    ]
+  },
+  {
+    id:"multisite", kind:"proj", start:"2024-10", end:"2025-01", when:"Oct. 2024 – janv. 2025", place:"IUT de Lannion",
+    domains:["Réseau","Sécurité"],
+    title:"Réseau d'entreprise multi-sites sécurisé",
+    org:"Maquette de deux sites reliés, du cahier des charges à la recette",
+    context:"Une entreprise fictive a deux sites à relier, chacun avec des serveurs publics, des clients publics et des clients privés. À partir du cahier des charges, il fallait déployer tout le réseau sur du vrai matériel Cisco. Chaque service devait être analysé, justifié, configuré puis testé.",
+    did:[
+      "Plan d'adressage et routage dynamique OSPF entre les deux sites, VLAN sur les commutateurs",
+      "DHCP, DNS primaire et secondaire, NAT, serveurs web, SSH et FTP",
+      "Filtrage par listes de contrôle d'accès et authentification RADIUS",
+      "Diffusion d'un flux vidéo entre les sites, et qualité de service pour qu'il reste fluide quand le lien est saturé",
+      "Cahier de recette de la maquette complète"
+    ],
+    tags:["Cisco ISR","OSPF","VLAN","ACL","RADIUS","QoS","DNS","DHCP"],
+    imgs:[
+      ["multisite-logique","Schéma logique","Serveurs publics, clients publics et clients privés sur chaque site, reliés en OSPF."],
+      ["multisite-cablage","Schéma de câblage","Routeurs, commutateurs, VLAN et interfaces de chaque site."],
+      ["multisite-qos","Test du flux vidéo","Capture Wireshark pendant la lecture du flux vidéo diffusé d'un site à l'autre.","photo"]
+    ]
+  },
+  {
+    id:"pentest", kind:"proj", start:"2024-09", end:"2024-11", when:"Sept. – nov. 2024", place:"IUT de Lannion",
+    domains:["Sécurité"],
+    title:"Test d'intrusion en boîte noire d'un serveur web",
+    org:"Audit de sécurité d'un site d'entreprise en cours de conception",
+    context:"Une entreprise fictive préparait son site web. Avec seulement son adresse, un scan de vulnérabilités et une machine Kali Linux, il fallait montrer jusqu'où un attaquant pouvait aller, puis expliquer comment corriger.",
+    did:[
+      "Repérage de la cible sur le réseau local et lecture du scan de vulnérabilités",
+      "Exploitation d'une porte dérobée du service FTP (ProFTPD 1.3.3c) avec Metasploit pour lire les fichiers système",
+      "Récupération du fichier des mots de passe, cassage du hash par dictionnaire, puis accès SSH et passage en root",
+      "Modification de la page d'accueil et prise de contrôle de WordPress, protégé par des identifiants par défaut",
+      "Démonstration d'un scénario de hameçonnage et rapport d'audit avec des corrections concrètes"
+    ],
+    tags:["Kali Linux","Nmap","Metasploit","John the Ripper","Hydra","WordPress"],
+    imgs:[
+      ["pentest-metasploit","Lancement de Metasploit","Initialisation de la base et de la console avant la recherche d'exploits."],
+      ["pentest-defacement","Page d'accueil modifiée","Preuve d'accès en écriture aux fichiers du site."],
+      ["pentest-phishing","Scénario de hameçonnage","Page WordPress détournée pour montrer le risque pour les visiteurs du site."]
+    ]
+  },
+  {
+    id:"voix", kind:"proj", start:"2024-05", end:"2024-06", when:"Mai – juin 2024", place:"IUT de Lannion",
+    domains:["Télécoms"],
+    title:"Modulation et démodulation d'une voix en Python",
+    org:"Traitement du signal appliqué à un enregistrement réel",
+    context:"Pour comprendre comment une voix voyage par radio, j'ai enregistré la mienne puis simulé toute la chaîne de transmission en Python, jusqu'à retrouver un son audible.",
+    did:[
+      "Enregistrement à 48 kHz sur 32 bits, et comparaison entre la taille théorique et la taille réelle du fichier",
+      "Analyse temporelle et spectrale du signal, normalisée pour correspondre à l'affichage d'Audacity",
+      "Filtre passe-bas à 3 kHz, puis modulation d'amplitude sur une porteuse à 9,6 kHz",
+      "Démodulation par multiplication par la porteuse, suppression de la composante à 19,2 kHz et écoute du résultat",
+      "Variante à 8 kHz pour observer l'effet d'une fréquence d'échantillonnage plus basse"
+    ],
+    tags:["Python","Traitement du signal","Modulation AM","Filtrage","Audacity"],
+    imgs:[
+      ["voix-signal","Signal de la voix enregistrée","Trois mots prononcés, visibles comme trois paquets d'amplitude."],
+      ["voix-modulee","Signal modulé (zoom)","L'enveloppe de la voix portée par la porteuse à 9,6 kHz."],
+      ["voix-spectre","Spectre après démodulation","La bande de la voix et la composante parasite autour de 19,2 kHz, à filtrer."]
+    ]
+  },
+  {
+    id:"cave", kind:"proj", start:"2024-03", end:"2024-06", when:"Printemps 2024", place:"IUT de Lannion",
+    domains:["Développement"],
+    title:"Application web de gestion d'une cave à vins",
+    org:"Site dynamique en PHP avec base de données",
+    context:"Une cave à vins avait besoin d'un site pour présenter son catalogue à ses clients et gérer ses stocks en interne. L'application devait distinguer les clients des administrateurs.",
+    did:[
+      "Authentification avec sessions et deux rôles : client et administrateur",
+      "Catalogue filtrable par couleur et par région",
+      "Ajout, modification et suppression de vins, mise à jour des quantités en stock",
+      "Base de données relationnelle : vins, stocks et utilisateurs"
+    ],
+    tags:["PHP","SQLite","PDO","JavaScript","Bootstrap"],
+    imgs:[
+      ["cave-modele","Modèle de données et pages","Les trois tables de la base et le rôle de chaque page PHP.",null,"svg"]
+    ]
+  },
+  {
+    id:"antarctique", kind:"proj", start:"2024-01", end:"2024-06", when:"Janv. – juin 2024", place:"IUT de Lannion",
+    domains:["Réseau"],
+    title:"Refonte du réseau d'une station polaire en Antarctique",
+    org:"Réponse à un appel d'offres, en concurrence avec d'autres équipes",
+    context:"Le réseau d'une station scientifique, entièrement en Wi-Fi, était jugé trop facile à espionner. Il fallait proposer puis maquetter un réseau filaire pour un bâtiment hermétique, une vingtaine de chercheurs et un accès Internet par satellite.",
+    did:[
+      "Recueil des besoins pièce par pièce lors des rendez-vous client : laboratoire, infirmerie, chambres, salle de contrôle, capteurs extérieurs",
+      "Architecture logique découpée en sous-réseaux par usage : travail, téléphonie, loisir, médical, sécurité, mesures, imprimantes, administration",
+      "Architecture matérielle, plan de câblage et devis chiffré présentés au client",
+      "Mes responsabilités : DNS, NAT (PAT statique et dynamique), Active Directory, architecture matérielle, schéma de dépannage, devis et configuration des équipements actifs",
+      "Maquette finale en salle réseau avec les services DNS, AD, DHCP et Apache"
+    ],
+    tags:["Cisco","VLAN","NAT/PAT","DNS","Active Directory","DHCP","Apache"],
+    imgs:[
+      ["antarctique-logique","Architecture logique","Un routeur central relie neuf sous-réseaux, avec l'accès Internet par le routeur Starlink."],
+      ["antarctique-materielle","Architecture matérielle","Postes, téléphones IP, capteurs et local technique répartis entre l'étage et le souterrain."]
+    ]
+  },
+  {
+    id:"softgraph", kind:"ent", start:"2021-09", end:"2023-06", when:"2021 – 2023", place:"Bamako, Mali",
+    domains:["Entrepreneuriat"],
+    title:"Services informatiques et design graphique",
+    org:"SoftGraph & Installation",
+    context:"Pendant ma formation en maintenance informatique à Bamako, la demande d'installation de postes était forte autour de moi. J'ai assuré la partie technique d'une petite structure de services pour des particuliers et des commerces.",
+    did:[
+      "Installation de systèmes d'exploitation (Windows, Ubuntu, Debian, Kali) et des suites bureautiques",
+      "Mise en place d'antivirus et vérification que les installations sont complètes, pour ne pas laisser de poste vulnérable",
+      "Conception graphique : affiches publicitaires, logos, badges, filtres et cartes professionnelles",
+      "Relation directe avec les clients, du besoin jusqu'à la livraison"
+    ],
+    tags:["Windows","Linux","Microsoft Office","Antivirus","Design graphique"],
+    imgs:[
+      ["softgraph-affiche","Affiche pour un commerce","Visuel publicitaire réalisé pour une entreprise de Bamako."],
+      ["softgraph-flyer","Affiche pour un traiteur","Mise en page des offres et des tarifs, pensée pour les réseaux sociaux."],
+      ["softgraph-logo-eagles","Logo pour une association étudiante","Identité visuelle d'une équipe organisatrice d'événements scolaires."]
+    ]
+  }
+];
+
+/* Traductions anglaises des réalisations : mêmes champs que ENTRIES, images = [titre, légende] dans le même ordre */
+const EN = {
+  dmu:{ when:"Jun – Aug 2026", place:"Leicester, United Kingdom", title:"Game Development Engineer Intern", org:"DMU Game Studios, De Montfort University",
+    context:"The university's studio wanted to know whether WebGPU, the new graphics API for browsers, can run a real multiplayer game with nothing to install. My job was to explore the API, build examples, then bring everything together in a Minecraft-style game.",
+    did:["3D rendering of a voxel world with WebGPU and Three.js","Real-time multiplayer over WebSocket: separate rooms, player and world synchronization, built-in chat","Deno server that keeps the world saved, even after a restart","Reusable examples and tools for web games, a playable online demo and a project poster"],
+    link:"Play the demo",
+    imgs:[["The game in the browser","Voxel world, item bar and chat between players."],["Architecture","The browser renders with WebGPU; the Deno server keeps the shared state over WebSocket."],["Life in England","Using English every day during the internship."]] },
+  orange:{ when:"Sep 2025 – present", place:"Toulouse", title:"WAN Presales Engineer, apprenticeship", org:"Orange Business · Airbus account",
+    context:"Airbus and its partners need to connect their sites in France and abroad. In presales, I connect their needs with the network solution Orange Business offers them.",
+    did:["Analyze the needs of clients and their partners","Design WAN connectivity solutions for sites in France and internationally","Assess the technical feasibility of proposed solutions","Client meetings: gather requirements and present network architectures"], imgs:[] },
+  dalhousie:{ when:"Apr – Jun 2025", place:"Halifax, Canada", title:"Systems Security Research Intern", org:"NIMS Lab, Faculty of Computer Science, Dalhousie University",
+    context:"LR-FHSS is a recent LoRaWAN modulation, the long-range network for connected devices. It hops from one frequency to another to resist jamming, but it had barely been tested in real conditions. The lab wanted to measure its limits against a jammer. I handled the transmission side, then took part in the jamming tests.",
+    did:["Getting started with LoRaWAN: LILYGO module registered on The Things Network, a message sent every 60 seconds to the lab gateway, and scrolling display of received messages on the module screen","LR-FHSS transmission on a Semtech LR1110 module mounted on an STM32 Nucleo board: adapted Semtech's poorly documented code and flashed the firmware with STM32CubeProgrammer, with a tutorial written for the team","Configured the North American band (904 MHz) and switched the code from LoRa to LR-FHSS, then sent a text message split into fragments to give the jammer more to hit","Jamming tests with a HackRF, with the spectrum observed in SDRangel: from outside the building, with the transmitter 250 m away, then with a deliberately weakened signal (less redundant coding, 50-character message, 2 dBm power)","Result: no packet lost, even at −132 dBm received power. The jammer was not powerful enough against LR-FHSS, which the supervisor confirmed with his own tests"],
+    imgs:[["LR-FHSS transmitter","Semtech LR1110 module on an STM32 Nucleo board, sending messages to The Things Network."],["LoRa transmitter","LILYGO T3 915 MHz module used for the first LoRaWAN tests."],["Jammer","HackRF with PortaPack, Jammer TX app set from 904.35 to 905.35 MHz."],["How LR-FHSS works","The signal is spread over several channels to better resist interference."],["Limits of LR-FHSS","Time on air, compatibility and gateway requirements."],["LoRa and LR-FHSS compared","Summary table presented to the research team."]] },
+  ipsec:{ when:"Jan – Apr 2025", place:"IUT de Lannion", title:"Securing networks and services: IPsec VPN and firewalls", org:"Follow-up to the multi-site network, with Stormshield firewalls",
+    context:"The two-site network built the previous semester worked, but its traffic was sent in clear and its services were exposed. It had to be hardened without breaking what worked.",
+    did:["IPsec VPN tunnel between the two sites to encrypt traffic crossing the Internet","Stormshield firewalls: private network, demilitarized zone for servers, captive portal and traffic filtering","Protection against ARP and DHCP spoofing","Secured services: DNSSEC, key-based SSH, FTPS and HTTPS","Acceptance test plan and defense in front of the jury"],
+    imgs:[["Cabling diagram","Each site now goes through a Stormshield firewall that separates the LAN from the DMZ."],["Role of the IPsec VPN","From the final presentation: ESP, ISAKMP and why a tunnel."],["Traffic filtering","From the final presentation: access control lists on Cisco routers."]] },
+  ampli:{ when:"Dec 2024", place:"IUT de Lannion", title:"Design of a 1.7 GHz RF amplifier", org:"Simulation and optimization in ADS",
+    context:"A radio amplifier only works well if its input and output are matched at the operating frequency. The goal was to design a transistor amplifier for 1.7 GHz, then meet strict matching criteria.",
+    did:["DC biasing of the transistor and S-parameter simulation","Replaced ideal components with real ones calculated for 1.7 GHz (C = 18.72 pF, L = 140.4 nH)","Before matching: 20.2 dB gain and −61.3 dB isolation","Matching networks drawn on the Smith chart: series inductor at the input, shunt capacitor at the output","Final optimization of the components to reach S11 and S22 below −20 dB"],
+    imgs:[["Amplifier schematic","Biased transistor with real components sized for 1.7 GHz."],["Matching on the Smith chart","Building the matching network with the ADS Smith Chart tool."],["Reflection coefficient S11","Clear dip around the operating frequency after matching."]] },
+  multisite:{ when:"Oct 2024 – Jan 2025", place:"IUT de Lannion", title:"Secure multi-site enterprise network", org:"Two connected sites, from specifications to acceptance testing",
+    context:"A fictional company has two sites to connect, each with public servers, public clients and private clients. Starting from the specifications, the whole network had to be deployed on real Cisco equipment. Each service had to be analyzed, justified, configured and tested.",
+    did:["Addressing plan and OSPF dynamic routing between the two sites, VLANs on the switches","DHCP, primary and secondary DNS, NAT, web, SSH and FTP servers","Filtering with access control lists and RADIUS authentication","Video streaming between sites, with quality of service to keep it smooth when the link is saturated","Acceptance test plan for the complete setup"],
+    imgs:[["Logical diagram","Public servers, public clients and private clients on each site, connected with OSPF."],["Cabling diagram","Routers, switches, VLANs and interfaces on each site."],["Video stream test","Wireshark capture while playing the video stream sent from one site to the other."]] },
+  pentest:{ when:"Sep – Nov 2024", place:"IUT de Lannion", title:"Black-box penetration test of a web server", org:"Security audit of a company website under development",
+    context:"A fictional company was preparing its website. With only its address, a vulnerability scan and a Kali Linux machine, the task was to show how far an attacker could go, then explain how to fix it.",
+    did:["Located the target on the local network and read the vulnerability scan","Exploited a backdoor in the FTP service (ProFTPD 1.3.3c) with Metasploit to read system files","Retrieved the password file, cracked the hash with a dictionary, then gained SSH access and became root","Modified the home page and took over WordPress, protected by default credentials","Demonstrated a phishing scenario and wrote an audit report with concrete fixes"],
+    imgs:[["Starting Metasploit","Initializing the database and console before searching for exploits."],["Modified home page","Proof of write access to the website files."],["Phishing scenario","Hijacked WordPress page showing the risk for the site's visitors."]] },
+  voix:{ when:"May – Jun 2024", place:"IUT de Lannion", title:"Modulating and demodulating a voice in Python", org:"Signal processing on a real recording",
+    context:"To understand how a voice travels over radio, I recorded my own and simulated the full transmission chain in Python, until I got back an audible sound.",
+    did:["Recording at 48 kHz on 32 bits, and comparison between the theoretical and actual file size","Time and spectral analysis of the signal, normalized to match Audacity's display","3 kHz low-pass filter, then amplitude modulation on a 9.6 kHz carrier","Demodulation by multiplying with the carrier, removal of the 19.2 kHz component and listening to the result","8 kHz variant to observe the effect of a lower sampling rate"],
+    imgs:[["Recorded voice signal","Three spoken words, visible as three bursts of amplitude."],["Modulated signal (zoom)","The voice envelope carried by the 9.6 kHz carrier."],["Spectrum after demodulation","The voice band and the unwanted component around 19.2 kHz, to be filtered."]] },
+  cave:{ when:"Spring 2024", place:"IUT de Lannion", title:"Web application to manage a wine cellar", org:"Dynamic PHP website with a database",
+    context:"A wine cellar needed a website to show its catalog to customers and manage its stock internally. The application had to tell customers and administrators apart.",
+    did:["Authentication with sessions and two roles: customer and administrator","Catalog filterable by color and region","Adding, editing and deleting wines, updating stock quantities","Relational database: wines, stock and users"],
+    imgs:[["Data model and pages","The three database tables and the role of each PHP page."]] },
+  antarctique:{ when:"Jan – Jun 2024", place:"IUT de Lannion", title:"Redesigning the network of an Antarctic research station", org:"Response to a call for tenders, competing with other teams",
+    context:"A research station's network, entirely on Wi-Fi, was considered too easy to spy on. The task was to propose and then build a wired network for a sealed building, about twenty researchers and satellite Internet access.",
+    did:["Gathered needs room by room during client meetings: laboratory, infirmary, bedrooms, control room, outdoor sensors","Logical architecture split into subnets by use: work, telephony, leisure, medical, security, measurements, printers, administration","Hardware architecture, cabling plan and priced quote presented to the client","My responsibilities: DNS, NAT (static and dynamic PAT), Active Directory, hardware architecture, troubleshooting diagram, quote and configuration of active equipment","Final lab setup with DNS, AD, DHCP and Apache services"],
+    imgs:[["Logical architecture","A central router connects nine subnets, with Internet access through the Starlink router."],["Hardware architecture","Computers, IP phones, sensors and the technical room spread between the upper floor and the basement."]] },
+  softgraph:{ when:"2021 – 2023", place:"Bamako, Mali", title:"IT services and graphic design", org:"SoftGraph & Installation",
+    context:"During my IT maintenance studies in Bamako, there was strong demand around me for computer setup. I handled the technical side of a small services business for individuals and shops.",
+    did:["Installing operating systems (Windows, Ubuntu, Debian, Kali) and office suites","Setting up antivirus software and checking installations were complete, so no computer was left vulnerable","Graphic design: advertising posters, logos, badges, filters and business cards","Direct contact with clients, from the request to delivery"],
+    imgs:[["Poster for a shop","Advertising visual made for a business in Bamako."],["Poster for a caterer","Layout of offers and prices, designed for social media."],["Logo for a student association","Visual identity for a team organizing school events."]] }
+};
+
+const UI = {
+  fr:{
+    tab_home:"Accueil", tab_work:"Réalisations", tab_path:"Parcours", tab_contact:"Contact",
+    hero_eyebrow:"Réseaux · Sécurité · Télécommunications",
+    hero_lede:"Élève ingénieur à <strong>IMT Atlantique</strong> en informatique, réseaux et télécommunications, en alternance chez <strong>Orange Business</strong> comme ingénieur avant-vente WAN. Je conçois des architectures réseau et je m'oriente vers la <strong>sécurité réseau</strong>.",
+    btn_work:"Voir les réalisations", btn_cv:"Télécharger mon CV", cv_other:"Aussi disponible", cv_other_link:"CV en anglais",
+    fact1:"Diplôme d'ingénieur, IMT Atlantique", fact2:"Stages à l'étranger : Canada, Royaume-Uni", fact3:"Projets techniques et entrepreneuriaux", fact4:"Pays de formation et de travail : Mali, France, Canada, Royaume-Uni",
+    latest_eyebrow:"Les plus récentes", latest_title:"Dernières réalisations", latest_all:"Toutes les réalisations →",
+    work_eyebrow:"Registre 2026 → 2021", lg_proj:"Projet", lg_exp:"Expérience professionnelle", lg_ent:"Entrepreneuriat",
+    path_eyebrow:"Formation et compétences", th_years:"Années", th_degree:"Diplôme",
+    ed1:"Diplôme d'ingénieur, IMT Atlantique", ed1s:"Informatique, réseaux et télécommunications, en apprentissage · Brest",
+    ed2:"BUT Réseaux et Télécommunications", ed2s:"Parcours cybersécurité · IUT de Lannion",
+    ed3:"DUT Électronique et maintenance informatique", ed3s:"Mention assez bien · Technolab-ISTA, Bamako",
+    ed4:"Baccalauréat technique, génie électronique", ed4s:"Mention assez bien · Lycée technique de Bamako",
+    sk1:"Réseaux", sk1d:"WAN, Cisco (routage, commutation, VLAN), OSPF, NAT/PAT, QoS, DNS, DHCP, Active Directory, RADIUS",
+    sk2:"Sécurité", sk2d:"VPN IPsec, pare-feux Stormshield, ACL, tests d'intrusion, audit de vulnérabilités, Kali Linux, Metasploit, Wireshark",
+    sk3:"Télécoms", sk3d:"Modulation et démodulation, conception RF sous ADS, LoRaWAN et LR-FHSS, radio logicielle (HackRF, SDRangel)",
+    sk4:"Développement", sk5:"Certification", sk5d:"MOOC SecNumacadémie de l'ANSSI", sk6:"Langues", sk6d:"Français, anglais",
+    hob_eyebrow:"En dehors du travail", hob_title:"Centres d'intérêt",
+    h1:"Hacking éthique", h1d:"Je résous des challenges sur Root-Me pour pratiquer l'attaque et la défense en dehors des cours.",
+    h2:"Sport", h2d:"Running, badminton, tennis et musculation.",
+    h3:"Cuisine", h3d:"Cuisiner et partager des repas.",
+    h4:"Voyages", h4d:"J'ai vécu et étudié ou travaillé au Mali, en France, au Canada et au Royaume-Uni.",
+    ct_title:"Échangeons sur un stage, une alternance ou un projet réseau.", ct_text:"Le plus simple est de m'écrire ou de me contacter sur LinkedIn.", ct_mail:"Écrire un e-mail",
+    sh_newer:"← Plus récent", sh_older:"Plus ancien →", sh_close:"Fermer ×",
+    b_context:"Contexte", b_did:"Ce que j'ai fait", b_tools:"Outils",
+    sort_old:"Afficher du plus ancien au plus récent", sort_new:"Afficher du plus récent au plus ancien",
+    kind:{proj:"Projet", exp:"Expérience", ent:"Entrepreneuriat"},
+    dom:{"Tout":"Tout","Réseau":"Réseau","Sécurité":"Sécurité","Télécoms":"Télécoms","Développement":"Développement","Expérience":"Expérience","Entrepreneuriat":"Entrepreneuriat"},
+    zoom:"Agrandir : ", tabs:"Onglets", filters:"Filtrer par domaine", axis:"Frise chronologique des réalisations, de 2026 à 2021"
+  },
+  en:{
+    tab_home:"Home", tab_work:"Work", tab_path:"Background", tab_contact:"Contact",
+    hero_eyebrow:"Networks · Security · Telecommunications",
+    hero_lede:"Engineering student at <strong>IMT Atlantique</strong> in computer science, networks and telecommunications, working as a WAN presales engineer apprentice at <strong>Orange Business</strong>. I design network architectures and I am moving toward <strong>network security</strong>.",
+    btn_work:"See my work", btn_cv:"Download my CV", cv_other:"Also available", cv_other_link:"CV in French",
+    fact1:"Engineering degree, IMT Atlantique", fact2:"Internships abroad: Canada, United Kingdom", fact3:"Technical and entrepreneurial projects", fact4:"Countries of study and work: Mali, France, Canada, United Kingdom",
+    latest_eyebrow:"Most recent", latest_title:"Latest work", latest_all:"All work →",
+    work_eyebrow:"Record 2026 → 2021", lg_proj:"Project", lg_exp:"Work experience", lg_ent:"Entrepreneurship",
+    path_eyebrow:"Education and skills", th_years:"Years", th_degree:"Degree",
+    ed1:"Engineering degree (Master's level), IMT Atlantique", ed1s:"Computer science, networks and telecommunications, work-study · Brest",
+    ed2:"Bachelor of Technology (BUT) in Networks and Telecommunications", ed2s:"Cybersecurity track · IUT de Lannion",
+    ed3:"Technical degree (DUT) in Electronics and IT Maintenance", ed3s:"With honors · Technolab-ISTA, Bamako",
+    ed4:"Technical baccalaureate, electronic engineering", ed4s:"With honors · Lycée technique de Bamako",
+    sk1:"Networking", sk1d:"WAN, Cisco (routing, switching, VLAN), OSPF, NAT/PAT, QoS, DNS, DHCP, Active Directory, RADIUS",
+    sk2:"Security", sk2d:"IPsec VPN, Stormshield firewalls, ACL, penetration testing, vulnerability assessment, Kali Linux, Metasploit, Wireshark",
+    sk3:"Telecom", sk3d:"Modulation and demodulation, RF design in ADS, LoRaWAN and LR-FHSS, software-defined radio (HackRF, SDRangel)",
+    sk4:"Development", sk5:"Certification", sk5d:"ANSSI SecNumacadémie MOOC", sk6:"Languages", sk6d:"French, English",
+    hob_eyebrow:"Outside work", hob_title:"Interests",
+    h1:"Ethical hacking", h1d:"I solve challenges on Root-Me to practice attack and defense outside class.",
+    h2:"Sports", h2d:"Running, badminton, tennis and weight training.",
+    h3:"Cooking", h3d:"Cooking and sharing meals.",
+    h4:"Travel", h4d:"I have lived and studied or worked in Mali, France, Canada and the United Kingdom.",
+    ct_title:"Let's talk about an internship, an apprenticeship or a network project.", ct_text:"The easiest way is to email me or reach out on LinkedIn.", ct_mail:"Send an email",
+    sh_newer:"← Newer", sh_older:"Older →", sh_close:"Close ×",
+    b_context:"Context", b_did:"What I did", b_tools:"Tools",
+    sort_old:"Show oldest first", sort_new:"Show newest first",
+    kind:{proj:"Project", exp:"Experience", ent:"Entrepreneurship"},
+    dom:{"Tout":"All","Réseau":"Networking","Sécurité":"Security","Télécoms":"Telecom","Développement":"Development","Expérience":"Experience","Entrepreneuriat":"Entrepreneurship"},
+    zoom:"Enlarge: ", tabs:"Tabs", filters:"Filter by field", axis:"Timeline of work, from 2026 to 2021"
+  }
+};
+const CV = { fr:"cv/CV_Mohamed_Djoncounda_SISSOKO_FR.pdf", en:"cv/CV_Mohamed_Djoncounda_SISSOKO_EN.pdf" };
+
+const DOMAINS = ["Tout","Réseau","Sécurité","Télécoms","Développement","Expérience","Entrepreneuriat"];
+const TABS = ["accueil","realisations","parcours","contact"];
+const $ = (s,r=document)=>r.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const src = im => "img/"+im[0]+"."+(im[4]||"webp");
+
+let lang = "fr";
+try { const s = localStorage.getItem("lang"); if (s==="fr"||s==="en") lang = s; } catch(e) {}
+const T = k => UI[lang][k];
+/* Champ d'une réalisation dans la langue choisie */
+const L = (e,f) => (lang==="en" && EN[e.id] && EN[e.id][f]!==undefined) ? EN[e.id][f] : e[f];
+const imgTitle = (e,i) => lang==="en" && EN[e.id] ? EN[e.id].imgs[i][0] : e.imgs[i][1];
+const imgCap = (e,i) => lang==="en" && EN[e.id] ? EN[e.id].imgs[i][1] : e.imgs[i][2];
+
+let filter="Tout", newestFirst=true;
+const ordered = () => [...ENTRIES].sort((a,b)=> newestFirst ? b.start.localeCompare(a.start) : a.start.localeCompare(b.start));
+const byDate = () => [...ENTRIES].sort((a,b)=>b.start.localeCompare(a.start));
+
+function card(e){
+  const im=e.imgs[0];
+  const thumb = im ? `<div class="thumb"><img src="${src(im)}" alt="" loading="lazy"></div>` : `<div class="thumb text">Orange Business</div>`;
+  return `<a class="card" href="#p-${e.id}" data-id="${e.id}" data-domains="${e.domains.join("|")}">
+    ${thumb}
+    <div class="body">
+      <div class="meta"><span>${esc(L(e,"when"))}</span><span class="kind ${e.kind==="exp"?"exp":""}">${T("kind")[e.kind]}</span></div>
+      <h3>${esc(L(e,"title"))}</h3>
+      <p class="org">${esc(L(e,"org"))} · ${esc(L(e,"place"))}</p>
+      <ul class="tags">${e.tags.slice(0,4).map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
+    </div></a>`;
+}
+function renderCards(){ $("#cards").innerHTML = ordered().map(card).join(""); applyFilter(); }
+function renderLatest(){ $("#latest").innerHTML = byDate().slice(0,3).map(card).join(""); }
+function renderFilters(){
+  $("#filters").setAttribute("aria-label",T("filters"));
+  $("#filters").innerHTML = DOMAINS.map(d=>{
+    const n = d==="Tout"?ENTRIES.length:ENTRIES.filter(e=>e.domains.includes(d)).length;
+    return `<button type="button" class="chip" aria-pressed="${d===filter}" data-d="${d}">${T("dom")[d]}<span class="n">${n}</span></button>`;
+  }).join("") + `<button type="button" class="sort" id="sort">${newestFirst?T("sort_old"):T("sort_new")}</button>`;
+}
+function applyFilter(){
+  const ok = el => filter==="Tout" || el.dataset.domains.split("|").includes(filter);
+  document.querySelectorAll("#cards .card").forEach(el=>{el.hidden=!ok(el);});
+  document.querySelectorAll(".axis .bar").forEach(b=>b.classList.toggle("dim",!ok(b)));
+}
+
+/* Frise : 2026 à gauche, 2021 à droite */
+function mIdx(s){const [y,m]=s.split("-").map(Number);return (y-2021)*12+(m-1);}
+function renderAxis(){
+  $("#axis").setAttribute("aria-label",T("axis"));
+  const W=1000,H=86,total=mIdx("2026-12")+1, x=m=>W-(m/total*W);
+  const lanes=[], rows=[];
+  [...ENTRIES].sort((a,b)=>a.start.localeCompare(b.start)).forEach(e=>{
+    const s=mIdx(e.start), en=mIdx(e.end)+1;
+    let lane=lanes.findIndex(end=>end<=s); if(lane<0){lane=lanes.length;lanes.push(0);} lanes[lane]=en;
+    rows.push({e,s,en,lane});
+  });
+  let svg=`<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="none">`;
+  for(let y=2021;y<=2026;y++){
+    const xr=x((y-2021)*12), xl=x((y-2020)*12);
+    svg+=`<line class="tick" x1="${xr}" x2="${xr}" y1="0" y2="${H-18}"/><text class="yr" x="${xl+4}" y="${H-4}">${y}</text>`;
+  }
+  svg+=`<line class="base" x1="0" x2="${W}" y1="${H-18}" y2="${H-18}"/>`;
+  const lh=Math.min(14,(H-26)/lanes.length);
+  rows.forEach(r=>{
+    const y=4+r.lane*(lh+2), x1=x(r.en), w=Math.max(6,x(r.s)-x1-2);
+    svg+=`<a class="bar ${r.e.kind}" href="#p-${r.e.id}" data-domains="${r.e.domains.join("|")}"><title>${esc(L(r.e,"when")+" · "+L(r.e,"title"))}</title><rect x="${x1+1}" y="${y}" width="${w}" height="${lh-2}"/></a>`;
+  });
+  $("#axis").innerHTML=svg+"</svg>";
+}
+
+/* Fiche */
+let current=null, lastTab="accueil";
+function fillSheet(){
+  const e=current;
+  const linkLabel = e.link ? (lang==="en" ? EN[e.id].link : e.link[0]) : "";
+  $("#sheet-body").innerHTML=`
+    <div class="meta"><span>${esc(L(e,"when"))}</span><span>${esc(L(e,"place"))}</span><span class="kind ${e.kind==="exp"?"exp":""}">${T("kind")[e.kind]}</span></div>
+    <h2 id="sheet-title">${esc(L(e,"title"))}</h2>
+    <p class="org">${esc(L(e,"org"))}</p>
+    <div class="block"><h4>${T("b_context")}</h4><p>${esc(L(e,"context"))}</p></div>
+    <div class="block"><h4>${T("b_did")}</h4><ul>${L(e,"did").map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>
+    <div class="block"><h4>${T("b_tools")}</h4><div><ul class="tags">${e.tags.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
+      ${e.link?`<p style="margin-top:16px"><a class="btn" href="${e.link[1]}">${esc(linkLabel)} ↗</a></p>`:""}</div></div>
+    ${e.imgs.length?`<div class="gallery">${e.imgs.map((im,i)=>`
+      <button type="button" data-i="${i}" aria-label="${esc(T("zoom")+imgTitle(e,i))}">
+        <span class="g-img"><img src="${src(im)}" alt="${esc(imgTitle(e,i))}" class="${im[3]==="photo"?"photo":""}"></span>
+        <figcaption><b>${esc(imgTitle(e,i))}</b>${esc(imgCap(e,i))}</figcaption>
+      </button>`).join("")}</div>`:""}`;
+  const list=byDate(), k=list.indexOf(e);
+  $("#sh-newer").disabled = k===0;
+  $("#sh-older").disabled = k===list.length-1;
+}
+function openSheet(id){
+  const e=ENTRIES.find(x=>x.id===id); if(!e) return false;
+  current=e; fillSheet();
+  $("#sheet").classList.add("open"); document.body.classList.add("locked");
+  $("#sheet-panel").scrollTop=0; $("#sh-close").focus();
+  return true;
+}
+function closeSheet(){ $("#sheet").classList.remove("open"); document.body.classList.remove("locked"); if(location.hash.startsWith("#p-")) location.hash=lastTab; }
+function stepSheet(dir){ const list=byDate(), n=list[list.indexOf(current)+dir]; if(n) location.hash="p-"+n.id; }
+
+/* Onglets */
+function showTab(t){
+  TABS.forEach(x=>{ $("#v-"+x).hidden = x!==t; });
+  document.querySelectorAll(".tabs a").forEach(a=>{ if(a.dataset.tab===t) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+}
+function route(){
+  const h=location.hash.slice(1);
+  if(h.startsWith("p-")){ showTab(lastTab); if(openSheet(h.slice(2))) return; }
+  $("#sheet").classList.remove("open"); document.body.classList.remove("locked");
+  const t=TABS.includes(h)?h:"accueil"; lastTab=t; showTab(t); window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+
+/* Langue */
+function applyLang(){
+  document.documentElement.lang = lang;
+  document.querySelectorAll("[data-i]").forEach(el=>{ const v=T(el.dataset.i); if(v!==undefined) el.innerHTML=v; });
+  $(".tabs").setAttribute("aria-label",T("tabs"));
+  document.querySelectorAll(".lang button").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===lang));
+  const other = lang==="fr" ? "en" : "fr";
+  document.querySelectorAll(".cv-link").forEach(a=>a.href=CV[lang]);
+  document.querySelectorAll(".cv-other").forEach(a=>a.href=CV[other]);
+  renderFilters(); renderAxis(); renderCards(); renderLatest();
+  if($("#sheet").classList.contains("open") && current) fillSheet();
+  if($("#lb").classList.contains("open")) showLb();
+}
+
+/* Visionneuse */
+let lbI=0;
+function showLb(){$("#lb-img").src=src(current.imgs[lbI]);$("#lb-img").alt=imgTitle(current,lbI);$("#lb-title").textContent=imgTitle(current,lbI);$("#lb-text").textContent=imgCap(current,lbI);$("#lb-count").textContent=(lbI+1)+" / "+current.imgs.length;
+  const multi=current.imgs.length>1;$("#lb-prev").style.visibility=$("#lb-next").style.visibility=multi?"visible":"hidden";}
+function openLb(i){lbI=i;showLb();$("#lb").classList.add("open");$("#lb-close").focus();}
+function closeLb(){$("#lb").classList.remove("open");const b=document.querySelector(`.gallery button[data-i="${lbI}"]`);b&&b.focus();}
+function step(d){const n=current.imgs.length;lbI=(lbI+d+n)%n;showLb();}
+
+/* Téléchargement du CV : dans la visionneuse claude.ai, on passe par la capacité downloads ; ailleurs (GitHub Pages), le lien marche tel quel */
+let DL=null;
+try { window.claude?.use?.("downloads").then(ns=>{DL=ns;}).catch(()=>{}); } catch(e) {}
+document.addEventListener("click",ev=>{
+  const a=ev.target.closest(".cv-link,.cv-other");
+  if(!a || !DL) return;
+  ev.preventDefault();
+  const href=a.getAttribute("href");
+  fetch(href).then(r=>r.blob()).then(blob=>DL.save({filename:href.split("/").pop(),data:blob})).catch(()=>{});
+});
+document.addEventListener("click",ev=>{
+  const lb=ev.target.closest(".lang button"); if(lb){lang=lb.dataset.lang;try{localStorage.setItem("lang",lang);}catch(e){}applyLang();return;}
+  const g=ev.target.closest(".gallery button"); if(g){openLb(+g.dataset.i);return;}
+  const c=ev.target.closest(".chip"); if(c){filter=c.dataset.d;renderFilters();applyFilter();return;}
+  if(ev.target.id==="sort"){newestFirst=!newestFirst;renderFilters();renderCards();return;}
+  if(ev.target.id==="sh-close"||ev.target.id==="sheet"){closeSheet();return;}
+  if(ev.target.id==="sh-newer"){stepSheet(-1);return;}
+  if(ev.target.id==="sh-older"){stepSheet(1);return;}
+  if(ev.target.id==="lb-close"||ev.target.classList.contains("lb-stage")||ev.target.id==="lb"){closeLb();return;}
+  if(ev.target.id==="lb-prev"){step(-1);return;}
+  if(ev.target.id==="lb-next"){step(1);return;}
+});
+document.addEventListener("keydown",ev=>{
+  if($("#lb").classList.contains("open")){
+    if(ev.key==="Escape")closeLb(); else if(ev.key==="ArrowRight")step(1); else if(ev.key==="ArrowLeft")step(-1);
+  } else if($("#sheet").classList.contains("open") && ev.key==="Escape") closeSheet();
+});
+
+applyLang(); route();
+</script>
 </body>
 </html>

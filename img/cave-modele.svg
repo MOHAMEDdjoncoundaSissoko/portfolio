@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" font-family="IBM Plex Mono, ui-monospace, monospace">
+  <rect width="960" height="520" fill="#f7f8f9"/>
+  <text x="40" y="52" font-size="20" fill="#0e1a2b" font-family="IBM Plex Sans, system-ui, sans-serif" font-weight="600">Modèle de données de l'application (SQLite)</text>
+  <g font-size="15">
+    <g transform="translate(40,90)">
+      <rect width="250" height="230" rx="6" fill="#fff" stroke="#0e1a2b" stroke-width="1.5"/>
+      <rect width="250" height="40" rx="6" fill="#0e1a2b"/>
+      <rect y="30" width="250" height="10" fill="#0e1a2b"/>
+      <text x="16" y="26" fill="#fff" font-weight="600">Vin</text>
+      <text x="16" y="70" fill="#8a6a1f">NoVin  PK</text>
+      <text x="16" y="100" fill="#0e1a2b">Producteur</text>
+      <text x="16" y="130" fill="#0e1a2b">NomVin</text>
+      <text x="16" y="160" fill="#0e1a2b">Annee</text>
+      <text x="16" y="190" fill="#0e1a2b">Couleur · Region</text>
+      <text x="16" y="218" fill="#0e1a2b">image</text>
+    </g>
+    <g transform="translate(380,90)">
+      <rect width="250" height="140" rx="6" fill="#fff" stroke="#0e1a2b" stroke-width="1.5"/>
+      <rect width="250" height="40" rx="6" fill="#0e1a2b"/>
+      <rect y="30" width="250" height="10" fill="#0e1a2b"/>
+      <text x="16" y="26" fill="#fff" font-weight="600">Stock_Cave</text>
+      <text x="16" y="70" fill="#8a6a1f">NoVin  FK</text>
+      <text x="16" y="100" fill="#0e1a2b">Quantite</text>
+    </g>
+    <g transform="translate(700,90)">
+      <rect width="220" height="170" rx="6" fill="#fff" stroke="#0e1a2b" stroke-width="1.5"/>
+      <rect width="220" height="40" rx="6" fill="#0e1a2b"/>
+      <rect y="30" width="220" height="10" fill="#0e1a2b"/>
+      <text x="16" y="26" fill="#fff" font-weight="600">utilisateurs</text>
+      <text x="16" y="70" fill="#8a6a1f">EMAIL  PK</text>
+      <text x="16" y="100" fill="#0e1a2b">PASS</text>
+      <text x="16" y="130" fill="#0e1a2b">STATUT</text>
+      <text x="16" y="158" fill="#5b6676" font-size="13">(admin / client)</text>
+    </g>
+    <path d="M290 160 H380" stroke="#8a6a1f" stroke-width="2" fill="none"/>
+    <text x="300" y="150" fill="#8a6a1f" font-size="13">1 — 1</text>
+  </g>
+  <g font-family="IBM Plex Sans, system-ui, sans-serif" font-size="15" fill="#0e1a2b">
+    <text x="40" y="380" font-weight="600">Pages PHP</text>
+    <text x="40" y="410">connexion.php → session + rôle    vins.php → catalogue    filtrer_vin.php → couleur × région</text>
+    <text x="40" y="440">insertion.php · modification.php · suppression.php → gestion du catalogue et des stocks (admin)</text>
+    <text x="40" y="470" fill="#5b6676">Accès aux données par PDO · mise en page Bootstrap · quantités en stock chargées en JavaScript</text>
+  </g>
+</svg>
