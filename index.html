@@ -173,6 +173,9 @@ body.locked{overflow:hidden}
 .block ul{margin:0;padding-left:18px;max-width:66ch}
 .block li{margin:0 0 8px}
 .block li::marker{color:var(--accent)}
+.block li b{font-weight:600}
+.team{margin:14px 0 0;font-size:14.5px;color:var(--muted);max-width:66ch}
+.result{font-family:var(--display);font-size:20px;line-height:1.4}
 @media (max-width:640px){.block{grid-template-columns:1fr;gap:8px}.sheet-body,.sheet-head{padding-left:18px;padding-right:18px}}
 .gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}
 .gallery button{padding:0;border:1px solid var(--rule);background:var(--surface);cursor:zoom-in;display:flex;flex-direction:column;text-align:left;color:var(--ink);font-family:var(--body)}
@@ -301,7 +304,7 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted);border-top:1px soli
         </div>
         <dl class="skills">
           <div class="skill"><dt data-i="sk1">Réseaux</dt><dd data-i="sk1d">WAN, Cisco (routage, commutation, VLAN), OSPF, NAT/PAT, QoS, DNS, DHCP, Active Directory, RADIUS</dd></div>
-          <div class="skill"><dt data-i="sk2">Sécurité</dt><dd data-i="sk2d">VPN IPsec, pare-feux Stormshield, ACL, tests d'intrusion, audit de vulnérabilités, Kali Linux, Metasploit, Wireshark</dd></div>
+          <div class="skill"><dt data-i="sk2">Sécurité</dt><dd data-i="sk2d">VPN IPsec, HTTPS/TLS, SSH par clé, FTPS, DNSSEC, pare-feux Stormshield, ACL, tests d'intrusion, audit de vulnérabilités, Kali Linux, Metasploit, Wireshark</dd></div>
           <div class="skill"><dt data-i="sk3">Télécoms</dt><dd data-i="sk3d">Modulation et démodulation, conception RF sous ADS, LoRaWAN et LR-FHSS, radio logicielle (HackRF, SDRangel)</dd></div>
           <div class="skill"><dt data-i="sk4">Développement</dt><dd>Python, C, Java, JavaScript (Three.js, WebGPU), PHP, SQL, HTML/CSS</dd></div>
           <div class="skill"><dt data-i="sk5">Certification</dt><dd data-i="sk5d">MOOC SecNumacadémie de l'ANSSI</dd></div>
@@ -427,20 +430,28 @@ const ENTRIES = [
   {
     id:"ipsec", kind:"proj", start:"2025-01", end:"2025-04", when:"Janv. – avr. 2025", place:"IUT de Lannion",
     domains:["Sécurité","Réseau"],
-    title:"Sécurisation des réseaux et des services : VPN IPsec et pare-feux",
-    org:"Suite du réseau multi-sites, avec des pare-feux Stormshield",
-    context:"Le réseau des deux sites montés le semestre précédent fonctionnait, mais ses échanges passaient en clair et ses services étaient exposés. Il fallait le durcir sans casser ce qui marchait.",
-    did:[
-      "Tunnel VPN IPsec entre les deux sites pour chiffrer le trafic qui passe par Internet",
-      "Pare-feux Stormshield : réseau privé, zone démilitarisée pour les serveurs, portail captif et filtrage des flux",
-      "Protection contre l'usurpation ARP et DHCP",
-      "Services sécurisés : DNSSEC, SSH par clé, FTPS et HTTPS",
-      "Cahier de recette et soutenance devant le jury"
+    title:"Sécurisation des réseaux et des services\u00a0: VPN IPsec, HTTPS et pare-feux",
+    org:"Durcir le réseau multi-sites, avec des pare-feux Stormshield",
+    context:"C'est le même réseau à deux sites que le projet précédent, mais il faut maintenant le sécuriser. Chaque site reçoit un boîtier Stormshield, un équipement que je découvrais, avec des règles strictes sur le rôle de chaque appareil.",
+    need:[
+      "Chiffrer les échanges entre les sites, sur les routeurs et pas sur le Stormshield",
+      "Contrôler l'accès des clients privés avec le Stormshield, sans qu'il filtre le trafic (le filtrage se fait sur le routeur Cisco)",
+      "Sécuriser le web et le DNS autrement que par le tunnel"
     ],
-    tags:["IPsec","Stormshield","DMZ","ACL","DHCP snooping","DNSSEC","HTTPS"],
+    did:[
+      "Tunnel IPsec sur les routeurs Cisco | Tout le trafic entre les sites (TCP, et aussi UDP) est chiffré en ESP. Un attaquant placé entre les deux sites ne voit rien d'exploitable.",
+      "HTTPS | Certificat TLS généré avec OpenSSL et HTTPS activé sur Apache : les pages web circulent chiffrées et le serveur est authentifié.",
+      "SSH et FTPS | Connexion SSH par clé RSA 4096 sur un port non standard, compte root réservé à l'adresse de l'administrateur, et transferts de fichiers chiffrés par TLS.",
+      "DNS avec DNSSEC | Les réponses DNS sont signées : un client peut vérifier qu'elles n'ont pas été falsifiées.",
+      "Stormshield | Portail captif qui oblige les clients privés à s'authentifier, NAT pour garder les adresses privées à l'intérieur, et relais DHCP.",
+      "Protections contre les attaques locales | DHCP snooping contre les faux serveurs DHCP, inspection ARP contre l'usurpation de la passerelle, redirections ICMP désactivées."
+    ],
+    team:"Réalisé aussi en équipe : filtrage par ACL sur le routeur Cisco, routage OSPF jusque sur les Stormshield.",
+    result:"Maquette validée en séance de recette, puis soutenue devant le jury.",
+    tags:["IPsec","HTTPS / TLS","SSH","FTPS","DNSSEC","Stormshield","DHCP snooping","ACL"],
     imgs:[
       ["ipsec-cablage","Schéma de câblage","Chaque site passe désormais par un pare-feu Stormshield qui sépare le LAN et la DMZ."],
-      ["ipsec-slide","Rôle du VPN IPsec","Extrait de la soutenance : ESP, ISAKMP et intérêt du tunnel."],
+      ["ipsec-slide","Principe du tunnel IPsec","Extrait de la soutenance : pourquoi chiffrer les échanges entre les sites."],
       ["ipsec-acl","Filtrage des flux","Extrait de la soutenance : listes de contrôle d'accès sur les routeurs Cisco."]
     ]
   },
@@ -468,16 +479,24 @@ const ENTRIES = [
     id:"multisite", kind:"proj", start:"2024-10", end:"2025-01", when:"Oct. 2024 – janv. 2025", place:"IUT de Lannion",
     domains:["Réseau","Sécurité"],
     title:"Réseau d'entreprise multi-sites sécurisé",
-    org:"Maquette de deux sites reliés, du cahier des charges à la recette",
-    context:"Une entreprise fictive a deux sites à relier, chacun avec des serveurs publics, des clients publics et des clients privés. À partir du cahier des charges, il fallait déployer tout le réseau sur du vrai matériel Cisco. Chaque service devait être analysé, justifié, configuré puis testé.",
-    did:[
-      "Plan d'adressage et routage dynamique OSPF entre les deux sites, VLAN sur les commutateurs",
-      "DHCP, DNS primaire et secondaire, NAT, serveurs web, SSH et FTP",
-      "Filtrage par listes de contrôle d'accès et authentification RADIUS",
-      "Diffusion d'un flux vidéo entre les sites, et qualité de service pour qu'il reste fluide quand le lien est saturé",
-      "Cahier de recette de la maquette complète"
+    org:"Deux sites à relier sur du vrai matériel Cisco, du cahier des charges à la recette",
+    context:"Une entreprise a deux sites reliés par un fournisseur d'accès qui route en OSPF. Il fallait concevoir puis déployer les deux sites sur des routeurs et des commutateurs Cisco, en justifiant chaque service par le cahier des charges.",
+    need:[
+      "Trois réseaux par site : serveurs, clients publics et clients privés",
+      "Le réseau privé ne doit jamais être visible de l'extérieur, et son accès doit être contrôlé",
+      "Une vidéo diffusée entre les sites doit rester fluide même quand les liens sont saturés"
     ],
-    tags:["Cisco ISR","OSPF","VLAN","ACL","RADIUS","QoS","DNS","DHCP"],
+    did:[
+      "DHCP avec relais | Les postes reçoivent leur adresse automatiquement, avec des plages dimensionnées sur les tailles imposées. Le relais sur le routeur permet aux demandes de franchir les sous-réseaux, ce qu'elles ne font pas seules.",
+      "DNS primaire et secondaire | Les serveurs sont joignables par leur nom. Le second serveur prend le relais si le premier tombe.",
+      "NAT | En sortant du site, les clients privés prennent l'adresse publique du routeur. Leur réseau reste invisible de l'extérieur, comme l'exigeait le cahier des charges.",
+      "RADIUS en 802.1X | Le port d'un poste reste fermé tant que son utilisateur ne s'est pas authentifié. Seules des personnes connues accèdent au réseau privé.",
+      "SSH | Connexion par clé RSA 4096 sur un port non standard, et compte root accessible uniquement depuis l'adresse de l'administrateur.",
+      "Routage OSPF et configurations prêtes à déployer | Interfaces côté postes en mode passif pour ne diffuser aucune information de routage. Configurations testées sur Packet Tracer pour remonter la maquette en quelques minutes."
+    ],
+    team:"Réalisé aussi en équipe : qualité de service pour la vidéo, filtrage par ACL, serveurs web et FTP.",
+    result:"Toutes les exigences ont été vérifiées une par une dans le cahier de recette.",
+    tags:["Cisco","OSPF","DHCP","DNS","NAT","RADIUS 802.1X","SSH","QoS"],
     imgs:[
       ["multisite-logique","Schéma logique","Serveurs publics, clients publics et clients privés sur chaque site, reliés en OSPF."],
       ["multisite-cablage","Schéma de câblage","Routeurs, commutateurs, VLAN et interfaces de chaque site."],
@@ -545,15 +564,22 @@ const ENTRIES = [
     id:"antarctique", kind:"proj", start:"2024-01", end:"2024-06", when:"Janv. – juin 2024", place:"IUT de Lannion",
     domains:["Réseau"],
     title:"Refonte du réseau d'une station polaire en Antarctique",
-    org:"Réponse à un appel d'offres, en concurrence avec d'autres équipes",
-    context:"Le réseau d'une station scientifique, entièrement en Wi-Fi, était jugé trop facile à espionner. Il fallait proposer puis maquetter un réseau filaire pour un bâtiment hermétique, une vingtaine de chercheurs et un accès Internet par satellite.",
-    did:[
-      "Recueil des besoins pièce par pièce lors des rendez-vous client : laboratoire, infirmerie, chambres, salle de contrôle, capteurs extérieurs",
-      "Architecture logique découpée en sous-réseaux par usage : travail, téléphonie, loisir, médical, sécurité, mesures, imprimantes, administration",
-      "Architecture matérielle, plan de câblage et devis chiffré présentés au client",
-      "Mes responsabilités : DNS, NAT (PAT statique et dynamique), Active Directory, architecture matérielle, schéma de dépannage, devis et configuration des équipements actifs",
-      "Maquette finale en salle réseau avec les services DNS, AD, DHCP et Apache"
+    org:"Réponse à un appel d'offres, de la conception à la maquette",
+    context:"Une base scientifique en Antarctique accueille une vingtaine de chercheurs, avec Internet par satellite. Son réseau, entièrement en Wi-Fi, était jugé trop facile à espionner. Le projet se déroulait comme un vrai appel d'offres : recueil des besoins auprès du client, soutenance face à d'autres équipes, puis maquette et recette.",
+    need:[
+      "Passer à un réseau 100 % filaire, découpé par usage",
+      "Centraliser les comptes et retrouver ses fichiers depuis n'importe quel poste",
+      "Rendre le site web et les services joignables depuis Internet avec une seule adresse publique"
     ],
+    did:[
+      "NAT | Toutes les machines internes sortent sur Internet derrière l'unique adresse publique de la station. Les requêtes venant d'Internet sont redirigées vers le bon serveur, DNS ou web.",
+      "DNS | Un même nom de site fonctionne à l'intérieur et à l'extérieur : le serveur répond avec l'adresse privée aux machines internes, et avec l'adresse publique aux machines d'Internet.",
+      "Active Directory | Deux comptes par chercheur, l'un pour le travail, l'autre personnel. Les dossiers personnels ne sont visibles que par leur propriétaire.",
+      "Architecture matérielle, schéma de dépannage et devis | Équipements placés pièce par pièce, puis solution chiffrée pour le client.",
+      "Configuration des équipements | VLAN pour isoler chaque usage, et un routeur qui les relie et sert aussi de relais DHCP."
+    ],
+    team:"Réalisé aussi en équipe : serveur DHCP, site web Apache avec pages à accès restreint.",
+    result:"Solution défendue devant le client, puis maquette complète testée lors de la recette finale.",
     tags:["Cisco","VLAN","NAT/PAT","DNS","Active Directory","DHCP","Apache"],
     imgs:[
       ["antarctique-logique","Architecture logique","Un routeur central relie neuf sous-réseaux, avec l'accès Internet par le routeur Starlink."],
@@ -595,17 +621,23 @@ const EN = {
     context:"LR-FHSS is a recent LoRaWAN modulation, the long-range network for connected devices. It hops from one frequency to another to resist jamming, but it had barely been tested in real conditions. The lab wanted to measure its limits against a jammer. I handled the transmission side, then took part in the jamming tests.",
     did:["Getting started with LoRaWAN: LILYGO module registered on The Things Network, a message sent every 60 seconds to the lab gateway, and scrolling display of received messages on the module screen","LR-FHSS transmission on a Semtech LR1110 module mounted on an STM32 Nucleo board: adapted Semtech's poorly documented code and flashed the firmware with STM32CubeProgrammer, with a tutorial written for the team","Configured the North American band (904 MHz) and switched the code from LoRa to LR-FHSS, then sent a text message split into fragments to give the jammer more to hit","Jamming tests with a HackRF, with the spectrum observed in SDRangel: from outside the building, with the transmitter 250 m away, then with a deliberately weakened signal (less redundant coding, 50-character message, 2 dBm power)","Result: no packet lost, even at −132 dBm received power. The jammer was not powerful enough against LR-FHSS, which the supervisor confirmed with his own tests"],
     imgs:[["LR-FHSS transmitter","Semtech LR1110 module on an STM32 Nucleo board, sending messages to The Things Network."],["LoRa transmitter","LILYGO T3 915 MHz module used for the first LoRaWAN tests."],["Jammer","HackRF with PortaPack, Jammer TX app set from 904.35 to 905.35 MHz."],["How LR-FHSS works","The signal is spread over several channels to better resist interference."],["Limits of LR-FHSS","Time on air, compatibility and gateway requirements."],["LoRa and LR-FHSS compared","Summary table presented to the research team."]] },
-  ipsec:{ when:"Jan – Apr 2025", place:"IUT de Lannion", title:"Securing networks and services: IPsec VPN and firewalls", org:"Follow-up to the multi-site network, with Stormshield firewalls",
-    context:"The two-site network built the previous semester worked, but its traffic was sent in clear and its services were exposed. It had to be hardened without breaking what worked.",
-    did:["IPsec VPN tunnel between the two sites to encrypt traffic crossing the Internet","Stormshield firewalls: private network, demilitarized zone for servers, captive portal and traffic filtering","Protection against ARP and DHCP spoofing","Secured services: DNSSEC, key-based SSH, FTPS and HTTPS","Acceptance test plan and defense in front of the jury"],
-    imgs:[["Cabling diagram","Each site now goes through a Stormshield firewall that separates the LAN from the DMZ."],["Role of the IPsec VPN","From the final presentation: ESP, ISAKMP and why a tunnel."],["Traffic filtering","From the final presentation: access control lists on Cisco routers."]] },
+  ipsec:{ when:"Jan – Apr 2025", place:"IUT de Lannion", title:"Securing networks and services: IPsec VPN, HTTPS and firewalls", org:"Hardening the multi-site network, with Stormshield firewalls",
+    context:"Same two-site network as the previous project, but now it had to be secured. Each site received a Stormshield appliance, a device I was discovering, with strict rules on the role of each piece of equipment.",
+    need:["Encrypt traffic between the sites, on the routers and not on the Stormshield","Control private clients' access with the Stormshield, without it filtering traffic (filtering is done on the Cisco router)","Secure the web and DNS in another way than the tunnel"],
+    did:["IPsec tunnel on the Cisco routers | All traffic between the sites (TCP, and UDP too) is encrypted with ESP. An attacker between the two sites sees nothing usable.","HTTPS | TLS certificate generated with OpenSSL and HTTPS enabled on Apache: web pages travel encrypted and the server is authenticated.","SSH and FTPS | SSH login with a 4096-bit RSA key on a non-standard port, root account limited to the administrator's address, and file transfers encrypted with TLS.","DNS with DNSSEC | DNS answers are signed: a client can check they have not been tampered with.","Stormshield | Captive portal forcing private clients to authenticate, NAT to keep private addresses inside, and DHCP relay.","Protection against local attacks | DHCP snooping against rogue DHCP servers, ARP inspection against gateway spoofing, ICMP redirects disabled."],
+    team:"Also done as a team: ACL filtering on the Cisco router, OSPF routing up to the Stormshields.",
+    result:"Setup validated during the acceptance session, then defended in front of the jury.",
+    imgs:[["Cabling diagram","Each site now goes through a Stormshield firewall that separates the LAN from the DMZ."],["How the IPsec tunnel works","From the final presentation: why traffic between sites is encrypted."],["Traffic filtering","From the final presentation: access control lists on Cisco routers."]] },
   ampli:{ when:"Dec 2024", place:"IUT de Lannion", title:"Design of a 1.7 GHz RF amplifier", org:"Simulation and optimization in ADS",
     context:"A radio amplifier only works well if its input and output are matched at the operating frequency. The goal was to design a transistor amplifier for 1.7 GHz, then meet strict matching criteria.",
     did:["DC biasing of the transistor and S-parameter simulation","Replaced ideal components with real ones calculated for 1.7 GHz (C = 18.72 pF, L = 140.4 nH)","Before matching: 20.2 dB gain and −61.3 dB isolation","Matching networks drawn on the Smith chart: series inductor at the input, shunt capacitor at the output","Final optimization of the components to reach S11 and S22 below −20 dB"],
     imgs:[["Amplifier schematic","Biased transistor with real components sized for 1.7 GHz."],["Matching on the Smith chart","Building the matching network with the ADS Smith Chart tool."],["Reflection coefficient S11","Clear dip around the operating frequency after matching."]] },
-  multisite:{ when:"Oct 2024 – Jan 2025", place:"IUT de Lannion", title:"Secure multi-site enterprise network", org:"Two connected sites, from specifications to acceptance testing",
-    context:"A fictional company has two sites to connect, each with public servers, public clients and private clients. Starting from the specifications, the whole network had to be deployed on real Cisco equipment. Each service had to be analyzed, justified, configured and tested.",
-    did:["Addressing plan and OSPF dynamic routing between the two sites, VLANs on the switches","DHCP, primary and secondary DNS, NAT, web, SSH and FTP servers","Filtering with access control lists and RADIUS authentication","Video streaming between sites, with quality of service to keep it smooth when the link is saturated","Acceptance test plan for the complete setup"],
+  multisite:{ when:"Oct 2024 – Jan 2025", place:"IUT de Lannion", title:"Secure multi-site enterprise network", org:"Connecting two sites on real Cisco equipment, from specifications to acceptance testing",
+    context:"A company has two sites connected by a provider that routes with OSPF. The task was to design and deploy both sites on Cisco routers and switches, justifying each service against the specifications.",
+    need:["Three networks per site: servers, public clients and private clients","The private network must never be visible from outside, and access to it must be controlled","A video streamed between the sites must stay smooth even when links are saturated"],
+    did:["DHCP with relay | Computers get their address automatically, with ranges sized to the required capacities. The relay on the router lets requests cross subnets, which they cannot do on their own.","Primary and secondary DNS | Servers are reachable by name. The second server takes over if the first one fails.","NAT | Leaving the site, private clients use the router's public address. Their network stays invisible from outside, as the specifications required.","RADIUS with 802.1X | A computer's port stays closed until its user has authenticated. Only known people reach the private network.","SSH | Key-based login with a 4096-bit RSA key on a non-standard port, and root account reachable only from the administrator's address.","OSPF routing and ready-to-deploy configurations | Interfaces facing computers set to passive so no routing information leaks. Configurations tested in Packet Tracer to rebuild the setup in minutes."],
+    team:"Also done as a team: quality of service for the video, ACL filtering, web and FTP servers.",
+    result:"Every requirement was checked one by one in the acceptance test plan.",
     imgs:[["Logical diagram","Public servers, public clients and private clients on each site, connected with OSPF."],["Cabling diagram","Routers, switches, VLANs and interfaces on each site."],["Video stream test","Wireshark capture while playing the video stream sent from one site to the other."]] },
   pentest:{ when:"Sep – Nov 2024", place:"IUT de Lannion", title:"Black-box penetration test of a web server", org:"Security audit of a company website under development",
     context:"A fictional company was preparing its website. With only its address, a vulnerability scan and a Kali Linux machine, the task was to show how far an attacker could go, then explain how to fix it.",
@@ -619,9 +651,12 @@ const EN = {
     context:"A wine cellar needed a website to show its catalog to customers and manage its stock internally. The application had to tell customers and administrators apart.",
     did:["Authentication with sessions and two roles: customer and administrator","Catalog filterable by color and region","Adding, editing and deleting wines, updating stock quantities","Relational database: wines, stock and users"],
     imgs:[["Data model and pages","The three database tables and the role of each PHP page."]] },
-  antarctique:{ when:"Jan – Jun 2024", place:"IUT de Lannion", title:"Redesigning the network of an Antarctic research station", org:"Response to a call for tenders, competing with other teams",
-    context:"A research station's network, entirely on Wi-Fi, was considered too easy to spy on. The task was to propose and then build a wired network for a sealed building, about twenty researchers and satellite Internet access.",
-    did:["Gathered needs room by room during client meetings: laboratory, infirmary, bedrooms, control room, outdoor sensors","Logical architecture split into subnets by use: work, telephony, leisure, medical, security, measurements, printers, administration","Hardware architecture, cabling plan and priced quote presented to the client","My responsibilities: DNS, NAT (static and dynamic PAT), Active Directory, hardware architecture, troubleshooting diagram, quote and configuration of active equipment","Final lab setup with DNS, AD, DHCP and Apache services"],
+  antarctique:{ when:"Jan – Jun 2024", place:"IUT de Lannion", title:"Redesigning the network of an Antarctic research station", org:"Response to a call for tenders, from design to working setup",
+    context:"A research station in Antarctica hosts about twenty scientists, with satellite Internet. Its network, entirely on Wi-Fi, was considered too easy to spy on. The project ran like a real call for tenders: gathering needs from the client, presenting against other teams, then building and testing the setup.",
+    need:["Move to a 100% wired network, split by use","Centralize accounts and let users find their files from any computer","Make the website and services reachable from the Internet with a single public address"],
+    did:["NAT | All internal machines reach the Internet behind the station's single public address. Requests coming from the Internet are forwarded to the right server, DNS or web.","DNS | The same site name works inside and outside: the server answers with the private address to internal machines and with the public address to Internet machines.","Active Directory | Two accounts per scientist, one for work and one personal. Personal folders are visible only to their owner.","Hardware architecture, troubleshooting diagram and quote | Equipment placed room by room, then the solution priced for the client.","Equipment configuration | VLANs to isolate each use, and a router that connects them and also acts as DHCP relay."],
+    team:"Also done as a team: DHCP server, Apache website with restricted pages.",
+    result:"Solution defended in front of the client, then the complete setup tested during final acceptance.",
     imgs:[["Logical architecture","A central router connects nine subnets, with Internet access through the Starlink router."],["Hardware architecture","Computers, IP phones, sensors and the technical room spread between the upper floor and the basement."]] },
   softgraph:{ when:"2021 – 2023", place:"Bamako, Mali", title:"IT services and graphic design", org:"SoftGraph & Installation",
     context:"During my IT maintenance studies in Bamako, there was strong demand around me for computer setup. I handled the technical side of a small services business for individuals and shops.",
@@ -644,7 +679,7 @@ const UI = {
     ed3:"DUT Électronique et maintenance informatique", ed3s:"Mention assez bien · Technolab-ISTA, Bamako",
     ed4:"Baccalauréat technique, génie électronique", ed4s:"Mention assez bien · Lycée technique de Bamako",
     sk1:"Réseaux", sk1d:"WAN, Cisco (routage, commutation, VLAN), OSPF, NAT/PAT, QoS, DNS, DHCP, Active Directory, RADIUS",
-    sk2:"Sécurité", sk2d:"VPN IPsec, pare-feux Stormshield, ACL, tests d'intrusion, audit de vulnérabilités, Kali Linux, Metasploit, Wireshark",
+    sk2:"Sécurité", sk2d:"VPN IPsec, HTTPS/TLS, SSH par clé, FTPS, DNSSEC, pare-feux Stormshield, ACL, tests d'intrusion, audit de vulnérabilités, Kali Linux, Metasploit, Wireshark",
     sk3:"Télécoms", sk3d:"Modulation et démodulation, conception RF sous ADS, LoRaWAN et LR-FHSS, radio logicielle (HackRF, SDRangel)",
     sk4:"Développement", sk5:"Certification", sk5d:"MOOC SecNumacadémie de l'ANSSI", sk6:"Langues", sk6d:"Français, anglais",
     hob_eyebrow:"En dehors du travail", hob_title:"Centres d'intérêt",
@@ -654,7 +689,7 @@ const UI = {
     h4:"Voyages", h4d:"J'ai vécu et étudié ou travaillé au Mali, en France, au Canada et au Royaume-Uni.",
     ct_title:"Échangeons sur un stage, une alternance ou un projet réseau.", ct_text:"Le plus simple est de m'écrire ou de me contacter sur LinkedIn.", ct_mail:"Écrire un e-mail",
     sh_newer:"← Plus récent", sh_older:"Plus ancien →", sh_close:"Fermer ×",
-    b_context:"Contexte", b_did:"Ce que j'ai fait", b_tools:"Outils",
+    b_context:"Contexte", b_need:"Le besoin", b_did:"Ce que j'ai fait", b_result:"Résultat", b_tools:"Outils",
     sort_old:"Afficher du plus ancien au plus récent", sort_new:"Afficher du plus récent au plus ancien",
     kind:{proj:"Projet", exp:"Expérience", ent:"Entrepreneuriat"},
     dom:{"Tout":"Tout","Réseau":"Réseau","Sécurité":"Sécurité","Télécoms":"Télécoms","Développement":"Développement","Expérience":"Expérience","Entrepreneuriat":"Entrepreneuriat"},
@@ -674,7 +709,7 @@ const UI = {
     ed3:"Technical degree (DUT) in Electronics and IT Maintenance", ed3s:"With honors · Technolab-ISTA, Bamako",
     ed4:"Technical baccalaureate, electronic engineering", ed4s:"With honors · Lycée technique de Bamako",
     sk1:"Networking", sk1d:"WAN, Cisco (routing, switching, VLAN), OSPF, NAT/PAT, QoS, DNS, DHCP, Active Directory, RADIUS",
-    sk2:"Security", sk2d:"IPsec VPN, Stormshield firewalls, ACL, penetration testing, vulnerability assessment, Kali Linux, Metasploit, Wireshark",
+    sk2:"Security", sk2d:"IPsec VPN, HTTPS/TLS, key-based SSH, FTPS, DNSSEC, Stormshield firewalls, ACL, penetration testing, vulnerability assessment, Kali Linux, Metasploit, Wireshark",
     sk3:"Telecom", sk3d:"Modulation and demodulation, RF design in ADS, LoRaWAN and LR-FHSS, software-defined radio (HackRF, SDRangel)",
     sk4:"Development", sk5:"Certification", sk5d:"ANSSI SecNumacadémie MOOC", sk6:"Languages", sk6d:"French, English",
     hob_eyebrow:"Outside work", hob_title:"Interests",
@@ -684,7 +719,7 @@ const UI = {
     h4:"Travel", h4d:"I have lived and studied or worked in Mali, France, Canada and the United Kingdom.",
     ct_title:"Let's talk about an internship, an apprenticeship or a network project.", ct_text:"The easiest way is to email me or reach out on LinkedIn.", ct_mail:"Send an email",
     sh_newer:"← Newer", sh_older:"Older →", sh_close:"Close ×",
-    b_context:"Context", b_did:"What I did", b_tools:"Tools",
+    b_context:"Context", b_need:"The need", b_did:"What I did", b_result:"Result", b_tools:"Tools",
     sort_old:"Show oldest first", sort_new:"Show newest first",
     kind:{proj:"Project", exp:"Experience", ent:"Entrepreneurship"},
     dom:{"Tout":"All","Réseau":"Networking","Sécurité":"Security","Télécoms":"Telecom","Développement":"Development","Expérience":"Experience","Entrepreneuriat":"Entrepreneurship"},
@@ -764,6 +799,8 @@ function renderAxis(){
 }
 
 /* Fiche */
+/* Une puce "Titre | texte" s'affiche avec le titre en gras */
+const item = d => { const k=d.indexOf(" | "); return k<0 ? `<li>${esc(d)}</li>` : `<li><b>${esc(d.slice(0,k))} :</b> ${esc(d.slice(k+3))}</li>`; };
 let current=null, lastTab="accueil";
 function fillSheet(){
   const e=current;
@@ -773,7 +810,9 @@ function fillSheet(){
     <h2 id="sheet-title">${esc(L(e,"title"))}</h2>
     <p class="org">${esc(L(e,"org"))}</p>
     <div class="block"><h4>${T("b_context")}</h4><p>${esc(L(e,"context"))}</p></div>
-    <div class="block"><h4>${T("b_did")}</h4><ul>${L(e,"did").map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>
+    ${e.need?`<div class="block"><h4>${T("b_need")}</h4><ul>${L(e,"need").map(d=>`<li>${esc(d)}</li>`).join("")}</ul></div>`:""}
+    <div class="block"><h4>${T("b_did")}</h4><div><ul>${L(e,"did").map(item).join("")}</ul>${e.team?`<p class="team">${esc(L(e,"team"))}</p>`:""}</div></div>
+    ${e.result?`<div class="block"><h4>${T("b_result")}</h4><p class="result">${esc(L(e,"result"))}</p></div>`:""}
     <div class="block"><h4>${T("b_tools")}</h4><div><ul class="tags">${e.tags.map(t=>`<li>${esc(t)}</li>`).join("")}</ul>
       ${e.link?`<p style="margin-top:16px"><a class="btn" href="${e.link[1]}">${esc(linkLabel)} ↗</a></p>`:""}</div></div>
     ${e.imgs.length?`<div class="gallery">${e.imgs.map((im,i)=>`
